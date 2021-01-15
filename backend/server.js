@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
 });
 
 // Connect to database
-mongoose.connect('mongodb://127.0.0.1:27017/scores', { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/ourcade-ts', { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 // Database sanity check
 connection.once('open', function() {
@@ -73,6 +73,7 @@ app.delete('/api/users', controllers.user.destroy);
 let User = db.User
 // Signup new account
 app.post('/api/signup', function signup(req, res) {
+    console.log('inside api/signup!');
     console.log(`${req.body.username} ${req.body.password}`);
     User.register(new User({ username: req.body.username }), req.body.password,
       function (err, newUser) {
@@ -84,9 +85,11 @@ app.post('/api/signup', function signup(req, res) {
 });
 // Login account
 app.post('/api/login', passport.authenticate('local'), function (req, res) {
-    console.log(JSON.stringify(req.user));
+    console.log('=> /api/login/ req.user: ', JSON.stringify(req.user));
+    console.log(' '); // new line placeholder
     res.send(req.user);
   });
+
 // Logout account
 app.post('/api/logout', function (req, res) {
     console.log("BEFORE logout", req);

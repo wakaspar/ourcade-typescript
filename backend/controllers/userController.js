@@ -3,11 +3,11 @@ const db = require('../models');
 // USER : Route definitions
 // Get all users
 function index(req, res) {
-    db.User.find(function(err, scores) {
+    db.User.find(function(err, user) {
         if (err) {
             console.log(err);
         } else {
-            res.json(scores);
+            res.json(user);
         }
     });
 }
@@ -15,8 +15,8 @@ function index(req, res) {
 // Get one user by :id
 function show(req, res) {
     let id = req.params.id;
-    db.User.findById(id, function(err, score) {
-        res.json(score);
+    db.User.findById(id, function(err, user) {
+        res.json(user);
     });
 }
 

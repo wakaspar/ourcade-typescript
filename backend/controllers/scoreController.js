@@ -20,7 +20,7 @@ function show(req, res) {
 }
 // Add a new score
 function create(req, res) {
-    console.log('BEFORE RESPONSE, req.body: ', req.body);
+    console.log('BEFORE RESPONSE - CREATE, req.body: ', req.body);
     let score = new db.Score(req.body);
     score.save()
         .then(score => {
@@ -32,6 +32,7 @@ function create(req, res) {
 }
 // Update one score by :id
 function update(req, res) {
+    console.log('BEFORE RESPONSE - UPDATE, req.body: ', req.body);
     db.Score.findById(req.params.id, function(err, score) {
         if (!score)
             res.status(404).send('data is not found');

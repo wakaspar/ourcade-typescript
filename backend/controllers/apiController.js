@@ -6,7 +6,10 @@ function index(req,res) {
         "endpoints" : [
             "/api/", 
             "/api/scores", 
-            "/api/users"
+            "/api/users",
+            "/api/signup",
+            "/api/login",
+            "/api/logout"
         ]
     });
 }
