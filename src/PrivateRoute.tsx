@@ -6,6 +6,7 @@ import { useAuth } from './context/auth';
 // 'PrivateRoute' functional component definition:
 const PrivateRoute = ({ component: Component, ...rest } :any) => {    
     const { authTokens } :any = useAuth();
+
     return(
         <Route 
             {...rest}

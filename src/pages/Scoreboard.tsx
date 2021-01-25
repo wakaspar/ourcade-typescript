@@ -61,7 +61,7 @@ const Scoreboard = () => {
 
     return (
         <div>
-            <h3>Scoreboard</h3>
+            <h2>Scoreboard</h2>
             <table className="table table-striped" style={{ marginTop: 20 }}>
               <thead>
                 <tr>

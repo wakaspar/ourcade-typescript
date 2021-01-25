@@ -2,14 +2,14 @@
 import React from 'react';
 
 // TypeScript interfaces:
-interface TesterProps {
+interface DashProps {
 }
 
 // 'Admin' functional component definition:
-const Tester = (props :TesterProps) => {
+const UserDashboard = (props :DashProps) => {
     return(
-        <div>Tester Component</div>
+        <div>User Dashboard</div>
     );
 }
 
-export default Tester;
+export default UserDashboard;

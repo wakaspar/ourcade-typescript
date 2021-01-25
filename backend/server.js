@@ -64,7 +64,7 @@ app.delete('/api/scores/:id', controllers.score.destroy);
 
 // USER Routes
 app.get('/api/users', controllers.user.index);
-app.get('/api/users', controllers.user.show);
+app.get('/api/users/:id', controllers.user.show);
 // app.post('/api/users', controllers.user.create);
 app.put('/api/users', controllers.user.update);
 app.delete('/api/users', controllers.user.destroy);
@@ -74,15 +74,17 @@ let User = db.User
 // Signup new account
 app.post('/api/signup', function signup(req, res) {
     console.log('inside api/signup!');
-    console.log(`${req.body.username} ${req.body.password}`);
+    console.log(`${req.body.username}, ${req.body.password}`);
     User.register(new User({ username: req.body.username }), req.body.password,
       function (err, newUser) {
         passport.authenticate('local')(req, res, function() {
           res.send(newUser);
         });
+        err ? console.log('err: ', err) : null;
       }
     )
 });
+
 // Login account
 app.post('/api/login', passport.authenticate('local'), function (req, res) {
     console.log('=> /api/login/ req.user: ', JSON.stringify(req.user));

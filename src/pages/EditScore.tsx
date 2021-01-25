@@ -54,11 +54,12 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
             setScorePlayerNum(res.score_player_num.toString());
         },
         []
-    )
+    );
 
     // 'getScore' function definition:
     const getScore = useCallback(
         (props: { match: { params: { id: string; }; }; }) => {
+            console.log('EditScore getScore() props: ', props);
             axios.get(`http://localhost:4000/api/scores/${params.id}`)
             .then(res => {
 
@@ -105,15 +106,16 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
         console.log('EditScore useEffect() hook fired!');
         console.log('scoreMultiplayer: ', scoreMultiplayer);
         console.log('scorePlayerNum: ', scorePlayerNum);
+        console.log('params: ', params);
 
         return getScore(props);
-    }, [getScore, isMounted, props, scoreMultiplayer, scorePlayerNum ]);
+    }, [getScore, isMounted, props, scoreMultiplayer, scorePlayerNum, params ]);
 
 
     // 'return' render:
     return (
         <div>
-        <h3>Edit Score</h3>
+        <h2>Edit Score</h2>
         <form onSubmit={onSubmit}>
             <div className="form-group">
                 <label>Score: </label>
@@ -199,7 +201,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
             </div>
         </form>
         </div>
-    )
+    );
 }
 
 export default EditScore;

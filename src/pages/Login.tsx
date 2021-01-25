@@ -8,12 +8,14 @@ import icon from "../pins-icon.png"
 
 // 'Login' functional component definition
 const Login = (props :any) => {
+    // variable declaration:
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [isError, setIsError] = useState(false);  
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const { setAuthTokens } :any = useAuth();
-    
+    // AuthContext API:
+    const { setAuthTokens }: any = useAuth();
+    // mounted component boolean:
     const _isMounted = useRef(null);
 
     // TODO: referer is currently hardcoded-into the <Redirect /> below.
@@ -29,9 +31,8 @@ const Login = (props :any) => {
         axios.post('http://localhost:4000/api/login', newUser)
           .then(result => {
             if (result.status === 200 || _isMounted.current) {
-                console.log('result.data: ', result.data);
-                setAuthTokens(result.data.hash);
                 setLoggedIn(true);                
+                setAuthTokens(result.data);
             } else {
                 setIsError(true);
             }
@@ -44,7 +45,7 @@ const Login = (props :any) => {
     useEffect( () => {
         const redirectIfLogged = async () => {
             if (isLoggedIn) {
-                console.log('Login useEffect() redirect')
+                console.log('Login useEffect() redirect');
                 return <Redirect to='/scores' />;
             }  
         }
