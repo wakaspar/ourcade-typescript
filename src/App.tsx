@@ -5,18 +5,23 @@ import PrivateRoute from './PrivateRoute';
 import { AuthContext } from './context/auth'
 
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+
+import UserDashboard from './pages/UserDashboard';
+import Profile from "./pages/Profile";
+import EditUser from './pages/EditUser';
+
 import CreateScore from "./pages/CreateScore";
 import EditScore from './pages/EditScore';
 import Scoreboard from './pages/Scoreboard';
-import UserDashboard from './pages/UserDashboard';
 
 import { Button } from './components/AuthForms';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import icon from "./pins-icon.png"
+
 
 // TypeScript interfaces:
 interface AppProps { /*...*/ }
@@ -87,6 +92,7 @@ function App(props :AppProps, state: AppState)  {
               <br/>
               <Route exact path="/" component={UserDashboard} />                
               <PrivateRoute path="/profile/:id" component={Profile} />
+              <PrivateRoute path="/user/edit/:id" component={EditUser} />
               <PrivateRoute path="/scores" component={Scoreboard} />
               <PrivateRoute path="/create" component={CreateScore} />
               <PrivateRoute path="/edit/:id" component={EditScore} />

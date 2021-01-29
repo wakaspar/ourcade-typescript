@@ -5,8 +5,10 @@ function index(req,res) {
         "name" : "ourcade-typescript backend API",
         "endpoints" : [
             "/api/", 
-            "/api/scores", 
+            "/api/scores",
+            "/api/scores/:id",
             "/api/users",
+            "/api/users/:id",
             "/api/signup",
             "/api/login",
             "/api/logout"
