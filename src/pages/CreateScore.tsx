@@ -1,6 +1,7 @@
 // Dependency list:
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { PlusCircleFill } from 'react-bootstrap-icons';
 
 // TypeScript interfaces:
 interface CreateScoreProps {
@@ -77,7 +78,14 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
 
     return (
       <div>
-        <h3>Create New Score</h3>
+        
+        <div style={{display: "inline-flex"}}>
+          <h2>
+            <PlusCircleFill style={{margin: "0px 3px 5px 0px"}} />
+            Add a new score
+          </h2>
+        </div>
+
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label>Score: </label>

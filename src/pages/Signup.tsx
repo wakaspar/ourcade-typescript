@@ -26,9 +26,9 @@ const Signup = () => {
         axios.post('http://localhost:4000/api/signup', newUser)
           .then(result => {
             if (result.status === 200 || _isMounted.current) {
-                console.log('result.data: ', result.data);
-                setAuthTokens(result.data.hash);
+                console.log('Signup postSignup() result: ', result);
                 setLoggedIn(true);
+                setAuthTokens(result.data);
             } else {
                 setIsError(true);
             }

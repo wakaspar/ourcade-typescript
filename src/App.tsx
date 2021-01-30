@@ -3,22 +3,22 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import { AuthContext } from './context/auth'
-
+// Public Components:
 import Home from "./pages/Home";
-
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
+// Authorized User Components:
 import UserDashboard from './pages/UserDashboard';
 import Profile from "./pages/Profile";
 import EditUser from './pages/EditUser';
-
+// Authorized Score Components:
 import CreateScore from "./pages/CreateScore";
 import EditScore from './pages/EditScore';
 import Scoreboard from './pages/Scoreboard';
-
+// Styles:
 import { Button } from './components/AuthForms';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { PersonCircle, PlusCircleFill, Globe } from 'react-bootstrap-icons';
 import './App.css';
 import icon from "./pins-icon.png"
 
@@ -37,32 +37,41 @@ interface AppState {
 function App(props :AppProps, state: AppState)  {
   
   const existingTokens = JSON.parse( localStorage.getItem('tokens') !);
-  const existingUser = JSON.parse( localStorage.getItem('user') !);
+  const existingUserID = JSON.parse( localStorage.getItem('user') !);
+  const existingUserName = JSON.parse( localStorage.getItem('name') !);
 
   const [authTokens, setAuthTokens] = useState(existingTokens);
-  const [currentUser, setCurrentUser] = useState(existingUser);
+  const [currentUser, setCurrentUser] = useState(existingUserID);
+  const [username, setUsername] = useState(existingUserName);
   
   // 'setTokens' function definition:
   const setTokens = (data: any) => {
     localStorage.setItem('tokens', JSON.stringify(data.hash));
     localStorage.setItem('user', JSON.stringify(data._id));
+    localStorage.setItem('name', JSON.stringify(data.username));
     
     console.log('localStorage.getItem(tokens): ', localStorage.getItem('tokens'));
     console.log('localStorage.getItem(user): ', localStorage.getItem('user'));
+    console.log('localStorage.getItem(name): ', localStorage.getItem('name'));
     
     setCurrentUser(data._id);
+    setUsername(data.username);
     setAuthTokens(data.hash);
   }
 
   // 'logout' function definition:
+  // TODO: setters aren't clearing localStorage, so the .clear() method below handles it for me...
+  // TODO: ...otherwise, i get a CORS error
   const logout = (): any => {
     setAuthTokens('');
     setCurrentUser('');
+    setUsername('')
+    localStorage.clear();
   }
 
-  // auth-based conditional render:
+  // JSX rendered via auth-based conditional:
   if(authTokens){
-    // auth'ed user return:
+    // Auth'ed user return:
     return (    
       <AuthContext.Provider value={ { authTokens, setAuthTokens: setTokens } }>
          <Router>
@@ -74,18 +83,27 @@ function App(props :AppProps, state: AppState)  {
                 </div>
                 <div className="collpase navbar-collapse">
                   <ul className="navbar-nav mr-auto">
-                  <li className="navbar-item">
-                    <Link to={"/profile/" + currentUser} className="nav-link">User Profile</Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/scores" className="nav-link">All Scores</Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Link to="/create" className="nav-link">Create Score</Link>
-                  </li>
-                  <li className="navbar-item">
-                    <Button onClick={logout}>Log out</Button>
-                  </li>
+                    <li className="navbar-item">
+                      <Link to="/scores" className="nav-link">
+                        <Globe style={{margin: "0px 3px 5px 0px"}} />
+                        Scoreboard
+                      </Link>
+                    </li>
+                    <li className="navbar-item">
+                      <Link to="/create" className="nav-link">
+                        <PlusCircleFill size={15} style={{margin: "0px 3px 5px 0px"}}/>
+                        Add a score
+                      </Link>
+                    </li>
+                    <li className="navbar-item">
+                      <Link to={"/profile/" + currentUser} className="nav-link">
+                        <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
+                        {username}
+                      </Link>
+                    </li>
+                    <li className="navbar-item">
+                      <Button onClick={logout}>Log out</Button>
+                    </li>
                   </ul>
                 </div>
               </nav>
@@ -103,7 +121,7 @@ function App(props :AppProps, state: AppState)  {
     );
 
   } else {
-    // non-auth'ed user return:
+    // Non-auth'ed user return:
     return (
       <AuthContext.Provider value={ { authTokens, setAuthTokens: setTokens } }>
         <Router>

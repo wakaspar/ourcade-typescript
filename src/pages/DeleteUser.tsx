@@ -10,6 +10,7 @@ interface DeleteUserProps {
 
 // 'DeleteUser' functional component definition:
 const DeleteUser = (props: DeleteUserProps) => {
+
     const existingTokens = JSON.parse( localStorage.getItem('tokens') !);
     const [authTokens, setAuthTokens] = useState(existingTokens);
 
@@ -22,9 +23,21 @@ const DeleteUser = (props: DeleteUserProps) => {
       props.unmount();
     }
 
+    const onDeleteRedirect = (authTokens: any) => {
+        console.log('onDeleteRedirect() fired!');
+        if (!authTokens) {
+            // localStorage.removeItem('user');
+            // localStorage.removeItem('name');
+            // localStorage.removeItem('tokens');
+            localStorage.clear();
+            window.location.reload(false);
+        }
+    }
+
     // 'useEffect' hook definition:
     useEffect(() => {
-        return console.log('authTokens @ useEffect(): ', authTokens);
+        console.log('DeleteUser useEffect() authTokens: ', authTokens);
+        return onDeleteRedirect(authTokens)
     }, [authTokens]);
 
     return (

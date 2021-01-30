@@ -1,9 +1,10 @@
 // Dependency list:
 import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 import { Link, useParams } from 'react-router-dom';
-import { Pencil } from 'react-bootstrap-icons';
+import { Pencil, PersonCircle } from 'react-bootstrap-icons';
+import { Button } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface ProfileProps {
@@ -57,14 +58,19 @@ const Profile = (props :ProfileProps) => {
 
     return(
         <div>
-          <span style={{display: "flex"}}>
-            <img src={logo} alt="" style={{width: "50px", border: "2px solid black", borderRadius: "50%", margin: "0px 5px"}}/>
-            <h2>{ username }'s profile</h2>
+          <div style={{display: "inline-flex"}}>
+            <h2>
+              <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
+              { username }'s profile
+            </h2>
 
-            <Link to={"/user/edit/" + params.id}>
-              <Pencil color="black" size={25} style={{margin: "0px 5px"}} />
+            <Link to={"/user/edit/" + params.id} className="nav-link">
+              <Button>
+                <Pencil style={{margin: "0px 4px 3px 0px"}} />
+                Edit user profile
+              </Button>
             </Link>
-          </span>
+          </div>
           
           <br/>
 

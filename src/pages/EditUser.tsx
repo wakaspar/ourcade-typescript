@@ -1,10 +1,11 @@
 // Dependency list:
 import React, { useCallback, useEffect, useState } from 'react';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 import { Link, useParams } from 'react-router-dom';
-import { X } from 'react-bootstrap-icons';
+import { PersonCircle, X } from 'react-bootstrap-icons';
 import axios from 'axios';
 import DeleteUser from './DeleteUser';
+import { Button } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface EditUserProps {
@@ -17,7 +18,7 @@ const EditUser = (props: EditUserProps) => {
     const [username, setUsername] = useState('');
     const [isMounted, setIsMounted] = useState(false);
     const [error, setError] = useState();
-    
+
     let params: any = useParams();
 
     // onChange methods:
@@ -34,30 +35,27 @@ const EditUser = (props: EditUserProps) => {
 
     // 'getUser' function definition:
     const getUser = useCallback(
-    (props: { match: { params: { id: string; }; }; }) => {
-        axios.get(`http://localhost:4000/api/users/${params.id}`)
-        .then(res => {
-            if (res.status === 200 && !isMounted) {
-                // console.log('Profile GET res.data: ', res.data);
+        (props: { match: { params: { id: string; }; }; }) => {
+            axios.get(`http://localhost:4000/api/users/${params.id}`)
+            .then(res => {
+                if (res.status === 200 && !isMounted) {
+                    setIsMounted(true);
+                    setUser(res.data);
+                }
+            })
+            .catch(err => {
+                setError(err.message);
                 setIsMounted(true);
-                setUser(res.data);
-            }
-        })
-        .catch(err => {
-            setError(err.message);
-            setIsMounted(true);
-            console.log('error:', error);
-        })
-    },
-    [error, params.id, isMounted, setUser]
+                console.log('error:', error);
+            })
+        },
+        [error, params.id, isMounted, setUser]
     );
 
     // 'handleDeleteScore' function definition:
     const handleDeleteUser = () => {
         console.log('EditUser handleDeleteUser() fired!');
         // this.props.history.push('/', this.state);
-        // let path = 'http://localhost:3000/'
-        // window.location.href = path;
     }
 
     // 'onSubmit' function definiton:
@@ -66,32 +64,36 @@ const EditUser = (props: EditUserProps) => {
         const editUser = {
             username: username,
         };
-        console.log('EditUser onSubmit() fired: ', editUser);
         axios.put(`http://localhost:4000/api/users/${params.id}`, editUser)
             .then(res => console.log(res.data));
-
         let path = 'http://localhost:3000/profile/' + params.id;
         window.location.href = path;
     }
 
     // 'useEffect' hook definition:
     useEffect(() => {
-        console.log('EditUser useEffect() hook fired!');
-
         return getUser(props);
     }, [getUser, isMounted, username, props, params]);
     
+    // JSX rendered:
     return(
-    
         <div>
-            <span style={{display: "flex"}}>
-                <img src={logo} alt="" style={{width: "50px", border: "2px solid black", borderRadius: "50%", margin: "0px 5px"}}/>
-                <h2>{username}'s profile</h2>
-                <Link to={"/profile/" + params.id}>
-                    <X color="black" size={25} style={{margin: "0px 5px"}} />
+            <div style={{display: "inline-flex"}}>
+                <h2>
+                    <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
+                    { username }'s profile
+                </h2>
+
+                <Link to={"/profile/" + params.id} className="nav-link">
+                    <Button>
+                    <X style={{margin: "0px 4px 3px 0px"}} />
+                    leave edit mode
+                    </Button>
                 </Link>
-            </span>
+            </div>
+
             <br/>
+
             <form onSubmit={onSubmit}>
                 <div className="form-group">
                     <label>Username: </label>

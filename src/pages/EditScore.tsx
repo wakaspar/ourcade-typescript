@@ -62,7 +62,6 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
             console.log('EditScore getScore() props: ', props);
             axios.get(`http://localhost:4000/api/scores/${params.id}`)
             .then(res => {
-
                 if (res.status === 200 && !isMounted) {
                     setScore(res.data);
                     setIsMounted(true);

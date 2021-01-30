@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Pencil } from 'react-bootstrap-icons';
+import { Pencil, Plus, Globe } from 'react-bootstrap-icons';
+import { Button } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface BoardProps {
@@ -61,22 +62,33 @@ const Scoreboard = () => {
 
     return (
         <div>
-            <h2>Scoreboard</h2>
-            <table className="table table-striped" style={{ marginTop: 20 }}>
-              <thead>
-                <tr>
-                  <th>Score Value</th>
-                  <th>Game</th>
-                  <th>P</th>
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                { scoreList(scores) }
-              </tbody>
-            </table>
-            <br/>
-        </div>
+          <div style={{display: "inline-flex"}}>
+            <h2 style={{margin: "auto"}}>
+              <Globe style={{margin: "0px 3px 5px 0px"}} />
+              Scoreboard
+            </h2>
+            <Link to="/create" className="nav-link">
+              <Button>
+                <Plus size={15} style={{margin: "0px 2px 2px 0px"}}/>
+                Add a score
+              </Button>
+            </Link>
+          </div>
+          <table className="table table-striped" style={{ marginTop: 20 }}>
+            <thead>
+              <tr>
+                <th>Score Value</th>
+                <th>Game</th>
+                <th>P</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              { scoreList(scores) }
+            </tbody>
+          </table>
+          <br/>
+      </div>
     )
 }
 export default Scoreboard;
