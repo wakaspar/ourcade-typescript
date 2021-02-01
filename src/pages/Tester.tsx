@@ -2,14 +2,14 @@
 import React from 'react';
 
 // TypeScript interfaces:
-interface TesterProps {
-}
+interface TesterProps {/* * */}
+interface TesterState {/* * */}
 
-// 'Admin' functional component definition:
-const Tester = (props :TesterProps) => {
-    return(
-        <div>Tester Component</div>
-    );
+// <Tester /> functional component definition:
+const Tester = (props: TesterProps, state: TesterState) => {
+  return(
+    <div>Tester Component</div>
+  );
 }
 
 export default Tester;

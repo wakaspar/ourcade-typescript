@@ -1,8 +1,13 @@
 // Dependency list:
 import React from 'react';
 
-// 'Home' functional component definition:
-const Home = (props: any) => {
-    return <div>Home Page</div>;
+// TypeScript interfaces:
+interface HomeProps {/* * */}
+interface HomeState {/* * */}
+
+// <Home /> functional component definition:
+const Home = (props: HomeProps, state: HomeState) => {
+  return <div>Home Page</div>;
 }
+
 export default Home;

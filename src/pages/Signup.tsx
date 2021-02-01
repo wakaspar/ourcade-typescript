@@ -6,21 +6,23 @@ import { useAuth } from '../context/auth';
 import { Card, Form, Input, Button, Error } from '../components/AuthForms';
 import icon from "../pins-icon.png"
 
-// 'Signup' functional component definition:
+// <Signup/> functional component definition:
 const Signup = () => {
-    const [isLoggedIn, setLoggedIn] = useState(false);
-    const [isError, setIsError] = useState(false);
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordAgain, setPasswordAgain] = useState('');
-    const { setAuthTokens } :any = useAuth();
-
-    const _isMounted = useRef(null);
+  // Variable declaration:
+  // component state varaibles:
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordAgain, setPasswordAgain] = useState('');
+  const { setAuthTokens } :any = useAuth();
+  // 'useRef' variable:
+  const _isMounted = useRef(null);
 
     // 'postSignup' function definition:
     function postSignup(){
         const newUser = {
-            username: userName,
+            username: username,
             password: password
         }
         axios.post('http://localhost:4000/api/signup', newUser)
@@ -61,9 +63,9 @@ const Signup = () => {
             <img src={icon} alt="ourcade-pins-logo" />
             <Input 
                 type="email" 
-                value={userName}
+                value={username}
                 onChange={e => {
-                    setUserName(e.target.value);
+                    setUsername(e.target.value);
                 }}
                 placeholder="email" 
             />

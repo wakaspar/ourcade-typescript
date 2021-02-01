@@ -15,14 +15,13 @@ interface CreateScoreState {
     score_player_num: number
 }
 
-// 'CreateScore' functional component definition:
+// <CreateScore /> functional component definition:
 const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
-    // variable declaration:
+    // Variable declaration; state getters/setters for <CreateScore />:
     const [scoreValue, setScoreValue] = useState('');
     const [scoreGame, setScoreGame] = useState('');
     const [scoreMultiplayer, setScoreMultiplayer] = useState(false);
     const [scorePlayerNum, setScorePlayerNum] = useState('1');
-    
     const [error, setError] = useState();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -40,14 +39,8 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
       setScorePlayerNum(e.target.value);
     }
 
-    // useEffect hook (monitors loudly):
+    // 'useEffect' hook definition:
     useEffect(() => {
-
-      console.log('CreateScore useEffect() hook fired!')
-      console.log('scoreMultiplayer: ', scoreMultiplayer);
-      console.log('scorePlayerNum: ', scorePlayerNum);
-      console.log('isMounted: ', isMounted)
-      // setScorePlayerNum(parseInt(scorePlayerNum));
       return (
         setIsMounted(true)
         
@@ -63,29 +56,25 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
             score_multiplayer: scoreMultiplayer,
             score_player_num: scorePlayerNum,
         };
-        
         axios.post('http://localhost:4000/api/scores', newScore)
-        .then((response: { data: any; }) => console.log('POSTing new score: ', response.data))
-        .catch(err => {
-          setError(err.message);
-          setIsMounted(true);
-          console.log('error:', error);
-        });
-
+          .catch(err => {
+            setError(err.message);
+            setIsMounted(true);
+            console.log('error:', error);
+          });
         let path = 'http://localhost:3000/scores'
         window.location.href = path;
     }
-
+    
+    // JSX rendered:
     return (
       <div>
-        
         <div style={{display: "inline-flex"}}>
           <h2>
             <PlusCircleFill style={{margin: "0px 3px 5px 0px"}} />
             Add a new score
           </h2>
         </div>
-
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label>Score: </label>
@@ -161,7 +150,6 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
               </div>
             </div>
           )}
-
           <div className="form-group">
             <input type="submit" value="Create Score" className="btn btn-success" />
           </div>
