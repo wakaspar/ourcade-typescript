@@ -58,7 +58,6 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
   // 'getScore' function definition:
   const getScore = useCallback(
     (props: { match: { params: { id: string; }; }; }) => {
-      console.log('EditScore getScore() props: ', props);
       axios.get(`http://localhost:4000/api/scores/${params.id}`)
       .then(res => {
         if (res.status === 200 && !isMounted) {
