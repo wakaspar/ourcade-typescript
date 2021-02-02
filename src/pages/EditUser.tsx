@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 import { PersonCircle, X } from 'react-bootstrap-icons';
 import axios from 'axios';
 import DeleteUser from './DeleteUser';
-import { Button } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface EditUserProps {
@@ -77,19 +76,23 @@ const EditUser = (props: EditUserProps) => {
   // JSX rendered:
   return(
     <div>
+
       <div style={{display: "inline-flex"}}>
-        <h2>
+        <h2 style={{margin: "auto"}}>
           <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
           { username }'s profile
         </h2>
         <Link to={"/profile/" + params.id} className="nav-link">
-          <Button>
-          <X style={{margin: "0px 4px 3px 0px"}} />
-          leave edit mode
-          </Button>
+          <button className="btn btn-primary">
+          <X size={20} style={{margin: "0px 4px 4px 0px"}} />
+          Cancel
+          </button>
         </Link>
       </div>
+
+
       <br/>
+      
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Username: </label>

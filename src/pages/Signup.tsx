@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
-import { Card, Form, Input, Button, Error } from '../components/AuthForms';
+import { Card, Form, Error } from '../components/AuthForms';
 import icon from "../pins-icon.png"
 
 // <Signup/> functional component definition:
@@ -58,39 +58,54 @@ const Signup = () => {
     }
 
     return(
-        <Card>
-          <Form>
-            <img src={icon} alt="ourcade-pins-logo" />
-            <Input 
-                type="email" 
-                value={username}
-                onChange={e => {
-                    setUsername(e.target.value);
-                }}
-                placeholder="email" 
+      <Card>
+        <Form>
+          <br/>
+          <p className="text-muted">Welcome to</p>
+          <img src={icon} alt="ourcade-pins-logo" />
+          <h1 className="display-4">Ourcade</h1>
+          <p className="text-muted">A personal pinball high score application</p>
+          <div className="row mb-4">          
+            <div className="col-sm-12">
+              <input type="email" 
+                     className="form-control" 
+                     value={username}
+                     onChange={e => {
+                       setUsername(e.target.value);
+                     }}
+                     placeholder="Email / username"
+              />
+            </div>
+          </div>
+          <div className="row mb-4">
+          <div className="col-sm-6">
+            <input type="password" 
+                   className="form-control" 
+                   value={password}
+                   onChange={e => {
+                     setPassword(e.target.value);
+                   }}
+                   placeholder="Password"
             />
-            <Input 
-                type="password" 
-                value={password}
-                onChange={e => {
-                    setPassword(e.target.value);
-                }}
-                placeholder="password" 
-            />      
-            <Input 
-                type="password" 
+          </div>
+        <div className="col-sm-6">
+            <input type="password" 
+                className="form-control" 
                 value={passwordAgain}
                 onChange={e => {
                     setPasswordAgain(e.target.value);
                 }}
-                placeholder="password again" 
-            />   
-            <br></br>   
-            <Button onClick={postSignup}>Sign up</Button>
-          </Form>
-          <Link to='/login'>Already have an account?</Link>
-          { isError && <Error>The username or password provided were incorrect!</Error> }
-        </Card>
+                placeholder="Confirm password"
+            />
+        </div>
+        </div>
+
+
+        <button onClick={postSignup} className="btn btn-primary">Sign up</button>
+        </Form>
+        <Link style={{margin: "3% 0"}} to='/login'>Already have an account?</Link>
+        { isError && <Error>The username or password provided were incorrect!</Error> }
+      </Card>
     );
 }
 

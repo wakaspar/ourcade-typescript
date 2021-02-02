@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
-import { Card, Form, Input, Button, Error } from '../components/AuthForms';
+import { Card, Form, Error } from '../components/AuthForms';
 import icon from "../pins-icon.png"
 
 // 'Login' functional component definition
@@ -59,26 +59,38 @@ const Login = (props :any) => {
   return(
     <Card>
       <Form>
+        <br/>
+        <p className="text-muted">Welcome to</p>
         <img src={icon} alt="ourcade-pins-logo" />
-        <Input 
-          type="email"
-          value={username}
-          onChange={e => {
-            setUsername(e.target.value);
-          }}
-          placeholder="email"
-        />
-        <Input
-          type="password"
-          value={password}
-          onChange={e => {
-            setPassword(e.target.value);
-          }}
-          placeholder="password"
-        />
-        <Button onClick={postLogin}>Sign in</Button>
+        <h1 className="display-4">Ourcade</h1>
+        <p className="text-muted">A personal pinball high score application</p>
+        <div className="row mb-4">          
+          <div className="col-sm-12">
+            <input type="email" 
+                   className="form-control" 
+                   value={username}
+                   onChange={e => {
+                     setUsername(e.target.value);
+                   }}
+                   placeholder="Email / username"
+            />
+          </div>
+        </div>
+        <div className="row mb-4">
+          <div className="col-sm-12">
+            <input type="password" 
+                   className="form-control" 
+                   value={password}
+                   onChange={e => {
+                     setPassword(e.target.value);
+                   }}
+                   placeholder="Password"
+            />
+          </div>
+        </div>
+        <button onClick={postLogin} className="btn btn-primary">Sign in</button>
       </Form>
-      <Link to='/signup'>Don't have an account?</Link>
+      <Link style={{margin: "3% 0"}} to='/signup'>Don't have an account?</Link>
       { isError && <Error>The username / password provided were incorrect</Error> }
     </Card>
   );

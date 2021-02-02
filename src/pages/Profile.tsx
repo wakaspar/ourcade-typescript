@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { Pencil, PersonCircle } from 'react-bootstrap-icons';
-import { Button } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface ProfileProps {
@@ -52,18 +51,20 @@ const Profile = (props :ProfileProps) => {
   // JSX rendered:
   return(
     <div>
+      
       <div style={{display: "inline-flex"}}>
-        <h2>
+        <h2 style={{margin: "auto"}}>
           <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
           { username }'s profile
         </h2>
         <Link to={"/user/edit/" + params.id} className="nav-link">
-          <Button>
-            <Pencil style={{margin: "0px 4px 3px 0px"}} />
-            Edit user profile
-          </Button>
+          <button className="btn btn-primary">
+            <Pencil size={18} style={{margin: "0px 4px 4px 0px"}} />
+            Edit profile
+          </button>
         </Link>
       </div>
+
       <br/>
       <div>
         <label>Username: </label>

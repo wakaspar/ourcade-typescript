@@ -15,10 +15,14 @@ import EditUser from './pages/EditUser';
 import CreateScore from "./pages/CreateScore";
 import EditScore from './pages/EditScore';
 import Scoreboard from './pages/Scoreboard';
-// Styles:
-import { Button } from './components/AuthForms';
+// Styles & icons:
 import "bootstrap/dist/css/bootstrap.min.css";
-import { PersonCircle, PlusCircleFill, Globe } from 'react-bootstrap-icons';
+import { Globe, 
+         PersonCircle, 
+         PersonPlusFill, 
+         BoxArrowInRight, 
+         PlusCircle,
+         BoxArrowLeft} from 'react-bootstrap-icons';
 import './App.css';
 import icon from "./pins-icon.png"
 import axios from 'axios';
@@ -35,8 +39,7 @@ interface AppState {
 
 // <App /> functional component definiton:
 function App(props :AppProps, state: AppState)  {
-  // Variable declarations:
-  // localStorage variables for <AuthContext />:
+  // Variable declarations; localStorage variables for <AuthContext />:
   const existingTokens = JSON.parse( localStorage.getItem('tokens') !);
   const existingUserID = JSON.parse( localStorage.getItem('user') !);
   const existingUserName = JSON.parse( localStorage.getItem('name') !);
@@ -44,6 +47,7 @@ function App(props :AppProps, state: AppState)  {
   const [authTokens, setAuthTokens] = useState(existingTokens);
   const [currentUserID, setCurrentUserID] = useState(existingUserID);
   const [username, setUsername] = useState(existingUserName);
+  // error handling & clean-up variables:
   const [isMounted, setIsMounted] = useState(false);
   const [error, setError] = useState();
   
@@ -67,6 +71,10 @@ function App(props :AppProps, state: AppState)  {
     setUsername('')
     // clear localStorage user data:
     localStorage.clear();
+    // force redirect to <Home/>:
+    // TODO: quick and dirty, better way is using Router's <Redirect />...
+    let path = 'http://localhost:3000/'
+    window.location.href = path;
   }
 
   // 'setUser' functon definition:
@@ -121,7 +129,7 @@ function App(props :AppProps, state: AppState)  {
                     </li>
                     <li className="navbar-item">
                       <Link to="/create" className="nav-link">
-                        <PlusCircleFill size={15} style={{margin: "0px 3px 5px 0px"}}/>
+                        <PlusCircle size={15} style={{margin: "0px 3px 5px 0px"}}/>
                         Add a score
                       </Link>
                     </li>
@@ -132,7 +140,10 @@ function App(props :AppProps, state: AppState)  {
                       </Link>
                     </li>
                     <li className="navbar-item">
-                      <Button onClick={logout}>Log out</Button>
+                      <button onClick={logout} className="btn btn-primary">
+                        <BoxArrowLeft style={{margin: "0px 10px 5px 0px"}} />
+                        Log out
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -145,6 +156,9 @@ function App(props :AppProps, state: AppState)  {
               <PrivateRoute path="/create" component={CreateScore} />
               <PrivateRoute path="/edit/:id" component={EditScore} />
             </div>
+            <footer>
+              <p style={{margin: "3% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
+            </footer>
           </div>
         </Router>
       </AuthContext.Provider>
@@ -164,10 +178,16 @@ function App(props :AppProps, state: AppState)  {
                 <div className="collpase navbar-collapse">
                   <ul className="navbar-nav mr-auto">
                   <li className="navbar-item">
-                    <Link to="/login" className="nav-link">Login</Link>
+                    <Link to="/login" className="nav-link">
+                      <BoxArrowInRight style={{margin: "0px 3px 5px 0px"}} />
+                      Login
+                    </Link>
                   </li>
                   <li className="navbar-item">
-                    <Link to="/signup" className="nav-link">Signup</Link>
+                    <Link to="/signup" className="nav-link">
+                      <PersonPlusFill style={{margin: "0px 3px 5px 0px"}} />
+                      Sign up
+                    </Link>
                   </li>
                   </ul>
                 </div>
@@ -177,6 +197,9 @@ function App(props :AppProps, state: AppState)  {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
             </div>
+            <footer>
+              <p style={{margin: "3% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
+            </footer>
           </div>
         </Router>
       </AuthContext.Provider>

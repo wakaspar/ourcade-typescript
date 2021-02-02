@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
 import DeleteScore from "./DeleteScore";
 import { useParams } from 'react-router-dom';
+import { Controller, Pencil, Trophy } from 'react-bootstrap-icons';
+import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface EditScoreProps {
@@ -27,6 +29,8 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
   const [scoreGame, setScoreGame] = useState('');
   const [scoreMultiplayer, setScoreMultiplayer] = useState(false);
   const [scorePlayerNum, setScorePlayerNum] = useState('1');
+  const [multiToggle, setMultiToggle] = useState('');
+  // error handling & clean-up variables:
   const [error, setError] = useState();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -98,30 +102,43 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
 
   // 'useEffect' hook definition:
   useEffect(() => {
+    if (scoreMultiplayer) {
+      setMultiToggle('Select player number:');
+    } else {
+      setMultiToggle('Click for multiplayer');
+    }
     return getScore(props);
   }, [getScore, isMounted, props, scoreMultiplayer, scorePlayerNum, params ]);
 
 
   // JSX rendered:
   return (
-  <div>
-    <h2>Edit Score</h2>
+  <BigCard>
+    <div style={{display: "inline-flex"}}>
+      <h2 style={{margin: "auto"}}>
+        <Pencil style={{margin: "0px 3px 5px 0px"}} />
+        Edit score
+      </h2>
+    </div>
     <form onSubmit={onSubmit}>
-      <div className="form-group">
-        <label>Score: </label>
+      <br/>
+      <div className="form-group" style={{ display:"flex" }}>
+      <Trophy size={25} style={{margin: ".75% 1.25%"}} />
         <input  type="number"
                 className="form-control"
                 value={scoreValue}
                 onChange={onChangeScoreValue}
                 data-placeholder={state.score_value}
+                placeholder="High score value"
         />
       </div>
-      <div className="form-group">
-        <label>Game: </label>
+      <div className="form-group" style={{ display:"flex" }}>
+        <Controller size={25} style={{margin: ".75% 1.25%"}} />
         <input  type="text"
                 className="form-control"
                 value={scoreGame}
                 onChange={onChangeScoreGame}
+                placeholder="Game played"
         />
       </div>
       <div>              
@@ -130,7 +147,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
                checked={scoreMultiplayer}
                onChange={onChangeScoreMultiplayer} 
         />
-        <label style={{padding: 3}}>Multiplayer:</label>
+        <label style={{padding: 3}}>{ multiToggle }</label>
       </div>
 
       { scoreMultiplayer && (
@@ -144,7 +161,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
                     checked={scorePlayerNum === '1'}
                     onChange={onChangeScorePlayerNum}
             />
-            <label className="form-check-label">1</label>
+            <label className="form-check-label">#1</label>
           </div>
           <div className="form-check form-check-inline">
             <input  className="form-check-input"
@@ -155,7 +172,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
                     checked={scorePlayerNum === '2'}
                     onChange={onChangeScorePlayerNum}
             />
-            <label className="form-check-label">2</label>
+            <label className="form-check-label">#2</label>
           </div>
           <div className="form-check form-check-inline">
             <input  className="form-check-input"
@@ -166,7 +183,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
                     checked={scorePlayerNum === '3'}
                     onChange={onChangeScorePlayerNum}
             />
-            <label className="form-check-label">3</label>
+            <label className="form-check-label">#3</label>
           </div>
           <div className="form-check form-check-inline">
             <input  className="form-check-input"
@@ -177,7 +194,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
                     checked={scorePlayerNum === '4'}
                     onChange={onChangeScorePlayerNum}
             />
-            <label className="form-check-label">4</label>
+            <label className="form-check-label">#4</label>
           </div>
         </div>
       )}
@@ -187,7 +204,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
         <DeleteScore score={props.match.params.id} unmount={handleDeleteScore} />
       </div>
     </form>
-  </div>
+  </BigCard>
   );
 }
 
