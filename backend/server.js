@@ -57,6 +57,7 @@ app.get('/api/', controllers.api.index);
 // Scores routes:
 app.get('/api/scores', controllers.score.index);
 app.get('/api/scores/:id', controllers.score.show);
+app.get('/api/users/scores/:id', controllers.score.userIndex);
 app.post('/api/scores', controllers.score.create);
 app.put('/api/scores/:id', controllers.score.update);
 app.delete('/api/scores/:id', controllers.score.destroy);

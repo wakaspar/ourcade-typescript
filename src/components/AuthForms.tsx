@@ -13,7 +13,7 @@ const Card = styled.div`
 `;
 
 const BigCard = styled.div`
-    max-width: 85%;
+    max-width: 88%;
     padding: 2%;
     margin: 0 auto; 
     box-sizing: border-box;

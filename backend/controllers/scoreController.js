@@ -11,6 +11,17 @@ function index(req, res) {
         }
     });
 }
+// Get all scores for a single user
+function userIndex(req, res) {
+    let id = req.params.id;
+    db.Score.find( { score_player: id }, function(err, scores) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(scores);
+        }
+    });
+}
 // Get one score by :id
 function show(req, res) {
     let id = req.params.id;
@@ -65,6 +76,7 @@ function destroy(req, res) {
 // Export module methods
 module.exports = {
     index: index,
+    userIndex: userIndex,
     show: show,
     create: create,
     update: update,

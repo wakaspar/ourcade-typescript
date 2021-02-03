@@ -1,7 +1,7 @@
 // Dependency list:
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Controller, PlusCircle, Trophy } from 'react-bootstrap-icons';
+import { Controller, Plus, Trophy } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
@@ -83,7 +83,7 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
 
         <div style={{display: "inline-flex"}}>
           <h2 style={{margin: "auto"}}>
-            <PlusCircle style={{margin: "0px 3px 5px 0px"}} />
+            <Plus style={{margin: "0px 3px 5px 0px"}} />
             Add a new score
           </h2>
         </div>
