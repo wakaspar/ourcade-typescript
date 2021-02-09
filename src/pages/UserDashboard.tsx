@@ -1,14 +1,142 @@
 // Dependency list:
-import React from 'react';
+import axios from 'axios';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import { Pencil, Plus } from 'react-bootstrap-icons';
+import { BigCard } from '../components/AuthForms';
+
+import * as Icons from 'react-bootstrap-icons';
 
 // TypeScript interfaces:
-interface UserDashProps {/* * */}
+interface UserDashProps {
+  score: { 
+    _id: number;
+    _player: any;
+    score_value: number;
+    score_game: string;
+    score_player_num: number;
+    score_multiplayer: boolean; 
+  }
+  location: any;
+  history: any;
+  match: any;
+}
 interface UserDashState {/* * */}
+
+
+// <Score /> functional component definition:
+const Score = (props: UserDashProps) => (
+  <tr>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score._player.username}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_value}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_game}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_player_num}</td>
+    <td>
+      <Link to={"/edit/" + props.score._id}>
+        <Pencil color="black" size={25} />
+      </Link>
+    </td> 
+  </tr>
+)
+
+
+// <UserHeader /> functional component definition:
+const UserHeader = (props: any) => {
+  // Variable declaration; state getters/setters for <UserHeader />:
+  const [isMounted, setIsMounted] = useState(false);
+  const [username, setUsername] = useState('');
+  const { [props.icon]: Icon }: any = Icons;
+  // 'setUser' functon definition:
+  const setUser = useCallback(
+    (props: any) => {
+      setUsername(props.name);
+      setIsMounted(true);
+    },[]
+  );
+  // 'useEffect' hook definition:
+  useEffect(() => {
+    return setUser(props);
+  }, [setUser, isMounted, username, props, Icon]);
+  // JSX rendered:
+  return(
+    <div style={{display: "inline-flex"}}>
+      <h2 style={{margin: "auto"}}>
+        <Icon style={{margin: "0px 3px 5px 0px"}} />
+        { username }'s { props.text }
+      </h2>
+      <Link to="/create" className="nav-link">
+        <button className="btn btn-dark btn-sm">
+          <Plus size={15} style={{margin: "0px 2px 2px 0px"}}/>
+          Add a score
+        </button>
+      </Link>
+    </div>
+  );
+}
+
 
 // <UserDashboard /> functional component definition:
 const UserDashboard = (props: UserDashProps, state: UserDashState) => {
+  // Variable declaration; localStorage variables:
+  const existingUserID = JSON.parse( localStorage.getItem('user') !);    
+  // state getters/setters for <UserDashboard />:
+  const [currentUserID] = useState(existingUserID);
+  const [scores, setScores]: any = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
+  const [error, setError] = useState();
+  
+  const [name, setName]: any = useState('');
+  
+  // 'scoreList' function definition [maps scores to <Score /> component]:
+  const scoreList = (scores: any) => {
+    return scores.map(function(currentScore: any, i: any){
+      return <Score score={currentScore} key={i} location history match />
+    });
+  };
+
+  // 'getUserScores' function definition:
+  const getUserScores = useCallback(() => {
+    axios.get(`http://localhost:4000/api/users/scores/${currentUserID}`)
+    .then(res => {
+      setScores(res.data);
+      setIsMounted(true);
+      setUserHeader(res.data);
+    })
+    .catch(err => {
+      setError(err.message);
+      setIsMounted(true);
+    })
+    if (error) { console.log('error: ', error) }
+  },[currentUserID, error]);
+
+  const setUserHeader = (scores: any) => {
+    setName(scores[0]._player.username);
+  }
+
+  // 'useEffect' hook definition:
+  useEffect(() => {
+    return getUserScores();
+  }, [getUserScores, isMounted]);
+    
+  // JSX Rendered:
   return(
-    <div>User Dashboard</div>
+    <BigCard>
+      <UserHeader name={ name } text={ "Dashboard" } icon={'BarChartLineFill'} />
+      <table className="table table-striped" style={{ marginTop: 20 }}>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Score Value</th>
+            <th>Game</th>
+            <th>P</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          { scoreList(scores) }
+        </tbody>
+      </table>
+    </BigCard>
   );
 }
 

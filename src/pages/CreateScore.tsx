@@ -10,7 +10,7 @@ interface CreateScoreProps {
     checked: any
 }
 interface CreateScoreState {
-    score_player: number
+    _player: number
     score_value: number
     score_game: string
     score_multiplayer: boolean
@@ -22,7 +22,7 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
     // Variable declaration; localStorage variables for <AuthContext />:
     const existingUserID = JSON.parse( localStorage.getItem('user') !);
     // state getters/setters for <CreateScore />:
-    const [scorePlayer] = useState(existingUserID);
+    const [_player] = useState(existingUserID);
     const [scoreValue, setScoreValue] = useState('');
     const [scoreGame, setScoreGame] = useState('');
     const [scoreMultiplayer, setScoreMultiplayer] = useState(false);
@@ -48,7 +48,6 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
 
     // 'useEffect' hook definition:
     useEffect(() => {
-      console.log('<CS/> isMounted: ', isMounted);
       if (scoreMultiplayer) {
         setMultiToggle('Select player number:');
       } else {
@@ -61,7 +60,7 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
     const onSubmit = (e :any) => {
         e.preventDefault();
         const newScore = {
-            score_player: scorePlayer,
+            _player: _player,
             score_value: scoreValue,
             score_game: scoreGame,
             score_multiplayer: scoreMultiplayer,
@@ -168,7 +167,7 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
             </div>
           )}
           <div className="form-group">
-            <input type="submit" value="Create Score" className="btn btn-success" />
+            <input type="submit" value="Create Score" className="btn btn-dark" />
           </div>
         </form>
       </BigCard>

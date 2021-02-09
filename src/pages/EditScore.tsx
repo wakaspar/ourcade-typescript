@@ -123,7 +123,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
     <form onSubmit={onSubmit}>
       <br/>
       <div className="form-group" style={{ display:"flex" }}>
-      <Trophy size={25} style={{margin: ".75% 1.25%"}} />
+        <Trophy size={25} style={{margin: ".75% 1.25%"}} />
         <input  type="number"
                 className="form-control"
                 value={scoreValue}
@@ -200,7 +200,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
       )}
 
       <div className="form-group">
-        <input type="submit" value="Edit Score" className="btn btn-success" style={{marginRight: 10}} />
+        <input type="submit" value="Edit Score" className="btn btn-dark" style={{marginRight: 10}} />
         <DeleteScore score={props.match.params.id} unmount={handleDeleteScore} />
       </div>
     </form>

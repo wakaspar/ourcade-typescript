@@ -104,7 +104,9 @@ function App(props :AppProps, state: AppState)  {
 
   // 'useEffect' hook definiton:
   useEffect( () => {
-    return getUser(currentUserID);
+    if (authTokens) {
+      return getUser(currentUserID);
+    }
   });
 
   // JSX rendered via auth-based conditional:
@@ -140,8 +142,8 @@ function App(props :AppProps, state: AppState)  {
                       </Link>
                     </li>
                     <li className="navbar-item">
-                      <button onClick={logout} className="btn btn-primary">
-                        <BoxArrowLeft style={{margin: "0px 10px 5px 0px"}} />
+                      <button onClick={logout} className="btn btn-dark btn-sm">
+                        <BoxArrowLeft style={{margin: "0px 8px 4px 0px"}} />
                         Log out
                       </button>
                     </li>
@@ -163,7 +165,6 @@ function App(props :AppProps, state: AppState)  {
         </Router>
       </AuthContext.Provider>
     );
-
   } else {
     // Non-auth'ed user return:
     return (

@@ -41,7 +41,7 @@ const DeleteUser = (props: DeleteUserProps) => {
   // JSX rendered:
   return (
     <span>
-      <input type="button" onClick={onDeleteScore} value="Delete User" className="btn btn-danger" />
+      <input type="button" onClick={onDeleteScore} value="Delete User" className="btn btn-secondary" />
     </span>
   );
 }

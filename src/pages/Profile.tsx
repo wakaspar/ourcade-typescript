@@ -2,7 +2,8 @@
 import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { Pencil, PersonCircle } from 'react-bootstrap-icons';
+import { At, Envelope, Lock, Pencil, PersonCircle } from 'react-bootstrap-icons';
+import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface ProfileProps {
@@ -10,11 +11,13 @@ interface ProfileProps {
 }
 
 // <Profile /> functional component definition:
-const Profile = (props :ProfileProps) => {
+const Profile = (props: ProfileProps) => {
   // Variable declaration:
   let params :any = useParams();
   // state getters/setters for <Profile />:
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('*********');
   const [isMounted, setIsMounted] = useState(false);
   const [error, setError] = useState();
 
@@ -22,6 +25,8 @@ const Profile = (props :ProfileProps) => {
   const setUser = useCallback(
     (res: any) => {
       setUsername(res.username);
+      setEmail(res.email);
+      setPassword(res.password);
     },[]
   );
 
@@ -50,7 +55,7 @@ const Profile = (props :ProfileProps) => {
 
   // JSX rendered:
   return(
-    <div>
+    <BigCard>
       
       <div style={{display: "inline-flex"}}>
         <h2 style={{margin: "auto"}}>
@@ -58,19 +63,30 @@ const Profile = (props :ProfileProps) => {
           { username }'s profile
         </h2>
         <Link to={"/user/edit/" + params.id} className="nav-link">
-          <button className="btn btn-primary">
+          <button className="btn btn-dark btn-sm">
             <Pencil size={18} style={{margin: "0px 4px 4px 0px"}} />
             Edit profile
           </button>
         </Link>
       </div>
 
-      <br/>
+      
       <div>
-        <label>Username: </label>
-        <p>{ username }</p>
+        <br/>
+        <div className="form-group" style={{ display:"flex" }}>
+          <At size={25} />
+          <p>{ username }</p>
+        </div>
+        <div className="form-group" style={{ display:"flex" }}>
+          <Envelope size={25} style={{marginRight: "4px"}} />
+          <p>{ email }</p>
+        </div>
+        <div className="form-group" style={{ display:"flex" }}>
+          <Lock size={25} />
+          <p>{ password }</p>
+        </div>
       </div>
-    </div>
+    </BigCard>
   );
 }
 

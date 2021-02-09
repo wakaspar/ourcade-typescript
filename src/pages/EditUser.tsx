@@ -2,9 +2,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 // import logo from '../logo.svg';
 import { Link, useParams } from 'react-router-dom';
-import { PersonCircle, X } from 'react-bootstrap-icons';
+import { At, Envelope, Lock, PersonCircle, X } from 'react-bootstrap-icons';
 import axios from 'axios';
 import DeleteUser from './DeleteUser';
+import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
 interface EditUserProps {
@@ -75,27 +76,23 @@ const EditUser = (props: EditUserProps) => {
     
   // JSX rendered:
   return(
-    <div>
-
+    <BigCard>
       <div style={{display: "inline-flex"}}>
         <h2 style={{margin: "auto"}}>
           <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
           { username }'s profile
         </h2>
         <Link to={"/profile/" + params.id} className="nav-link">
-          <button className="btn btn-primary">
-          <X size={20} style={{margin: "0px 4px 4px 0px"}} />
+          <button className="btn btn-dark btn-sm">
+          <X size={20} style={{margin: "0px 3px 1px 0px"}} />
           Cancel
           </button>
         </Link>
       </div>
-
-
-      <br/>
-      
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
+        <br/>
+        <div className="form-group" style={{ display:"flex" }}>
+          <At size={25} style={{margin: ".75% 1.25%"}} />
           <input  type="text"
                   className="form-control"
                   value={username}
@@ -103,12 +100,26 @@ const EditUser = (props: EditUserProps) => {
                   data-placeholder={username}
           />
         </div>
+        <div className="form-group" style={{ display:"flex" }}>
+          <Envelope size={25} style={{margin: ".75% 1.25%"}} />
+          <input  type="text"
+                  className="form-control"
+                  placeholder="email"
+          />
+        </div>
+        <div className="form-group" style={{ display:"flex" }}>
+          <Lock size={25} style={{margin: ".75% 1.25%"}} />
+          <input  type="text"
+                  className="form-control"
+                  placeholder="password"
+          />
+        </div>
         <div className="form-group">
-          <input type="submit" value="Edit Profile" className="btn btn-success" style={{marginRight: 10}} />
+          <input type="submit" value="Edit Profile" className="btn btn-dark" style={{marginRight: 10}} />
           <DeleteUser user={props.match.params.id} unmount={handleDeleteUser} />
         </div>
       </form>
-    </div>
+    </BigCard>
   );
 }
 

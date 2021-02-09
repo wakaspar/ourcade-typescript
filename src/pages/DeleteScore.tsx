@@ -20,7 +20,7 @@ const DeleteScore = (props: ScoreProps) => {
   // JSX returned:
   return (
     <span>
-      <input type="button" onClick={onDeleteScore} value="Delete Score" className="btn btn-danger" />
+      <input type="button" onClick={onDeleteScore} value="Delete Score" className="btn btn-secondary" />
     </span>
   );
 }
