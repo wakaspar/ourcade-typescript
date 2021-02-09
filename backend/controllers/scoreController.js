@@ -1,31 +1,34 @@
-const db = require('../models');
+const db = require('../models'),
+    Score = db.Score;
 
 // SCORE : Route definitions
 // Get all scores
 function index(req, res) {
-    db.Score.find(function(err, scores) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(scores);
-        }
-    });
+    Score
+    .find(function(err, scores) {
+        if (err) { console.log(err); }
+        res.json(scores);
+    })
+    .populate('_player')
+    .exec();
 }
 // Get all scores for a single user
 function userIndex(req, res) {
     let id = req.params.id;
-    db.Score.find( { score_player: id }, function(err, scores) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(scores);
-        }
-    });
+    Score
+    .find( { _player: id }, function(err, scores) {
+        if (err) { console.log(err); }
+        res.json(scores);
+    })
+    .populate('_player')
+    .exec();
 }
 // Get one score by :id
 function show(req, res) {
     let id = req.params.id;
-    db.Score.findById(id, function(err, score) {
+    Score
+    .findById(id, function(err, score) {
+        if (err) { console.log(err); }
         res.json(score);
     });
 }
@@ -73,6 +76,17 @@ function destroy(req, res) {
             })
       });
 }
+
+function destroyAll(req, res) {
+    db.Score.deleteMany({})
+        .then(score => {
+            res.status(200).json({'ALl scores deleted!!': score});
+        })
+        .catch(err => {
+            res.status(400).send('failed to delete all scores - err: ', err);
+        })
+};
+
 // Export module methods
 module.exports = {
     index: index,
@@ -80,5 +94,6 @@ module.exports = {
     show: show,
     create: create,
     update: update,
-    destroy: destroy
+    destroy: destroy,
+    destroyAll: destroyAll,
   }

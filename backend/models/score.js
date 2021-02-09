@@ -1,10 +1,10 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
 var ScoreSchema = new Schema({
-    score_player: {
+    _player: {
         type: Schema.Types.ObjectId,
         ref: 'User',
     },

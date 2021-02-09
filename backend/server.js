@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 
 // MONGODB INSTANCE CONNECTION:
 // Connect to database:
-mongoose.connect('mongodb://127.0.0.1:27017/ourcade-ts', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.createConnection('mongodb://127.0.0.1:27017/ourcade-ts', { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 // Database sanity check:
 connection.once('open', function() {
@@ -61,6 +61,7 @@ app.get('/api/users/scores/:id', controllers.score.userIndex);
 app.post('/api/scores', controllers.score.create);
 app.put('/api/scores/:id', controllers.score.update);
 app.delete('/api/scores/:id', controllers.score.destroy);
+app.delete('/api/scores/', controllers.score.destroyAll);
 // User routes:
 app.get('/api/users', controllers.user.index);
 app.get('/api/users/:id', controllers.user.show);
