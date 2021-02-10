@@ -88,7 +88,7 @@ const Login = (props :any) => {
             />
           </div>
         </div>
-        <button onClick={postLogin} className="btn btn-primary">Sign in</button>
+        <button onClick={postLogin} className="btn btn-dark">Sign in</button>
       </Form>
       <Link style={{margin: "3% 0"}} to='/signup'>Don't have an account?</Link>
       { isError && <Error>The username / password provided were incorrect</Error> }

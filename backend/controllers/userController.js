@@ -9,7 +9,7 @@ const db = require('../models'),
 function index(req, res) {
     User
     .find(function(err, user) {
-        if (err) { console.log(err); }
+        if (err) console.log(err);
         res.json(user);
     });
 }
@@ -18,15 +18,16 @@ function show(req, res) {
     let id = mongoose.Types.ObjectId(req.params.id);
     User
     .findById(id, function(err, user) {
-        if (err) { console.log(err) }
+        if (err) console.log(err);
         res.json(user)
     })
 }
 // Add a new user:
-function signup(req, res) {
+function create(req, res) {
+    console.log('BEFORE CREATE - REQ.BODY: ', req.body);
     User
     .register(
-        new User({ username: req.body.username, email: req.body.email }), req.body.password,
+        new User({ username: req.body.username, email: req.body.email, avatar: null }), req.body.password,
         function(err, newUser) {
             passport.authenticate('local')(req, res, function() {
                 res.send(newUser);
@@ -36,20 +37,43 @@ function signup(req, res) {
     )
 }
 // Update one user by [:id]:
-function update(req, res) {
+function update(req, res, next) {
+    console.log('BEFORE UPDATE - REQ.BODY: ', req.body);
+    console.log('BEFORE UPDATE - REQ.FILE: ', req.file);
     let id = mongoose.Types.ObjectId(req.params.id);
     User
     .findById(id, function(err, user) {
         if (!user)
             res.status(404).send('User not found: ', err);
         else
-            user.name = req.body.name;
+            user.username = req.body.username;
             user.email = req.body.email;
+            user.avatar = req.body.avatar;
             user.save().then(user => {
-                res.status(400).json('User updated successfully: ', user);
+                res.status(400).json(user);
             })
             .catch(err => {
                 res.status(400).send('Failed to update user - err: ', err);
+            });
+    });
+}
+// Upload new user avatar:
+function avatar(req, res, next) {
+    console.log('BEFORE AVATAR - REQ.BODY: ', req.body);
+    console.log('BEFORE AVATAR - REQ.BODY: ', req.body);
+    console.log('BEFORE AVATAR - REQ.FILE: ', req.file);
+    let id = mongoose.Types.ObjectId(req.params.id);
+    User
+    .findById(id, function(err, user) {
+        if (!user)
+            res.status(404).send(err);
+        else
+            user.avatar = req.avatar;
+            user.save().then(user => {
+                res.status(400).json(user);
+            })
+            .catch(err => {
+                res.status(400).send(err);
             });
     });
 }
@@ -72,7 +96,8 @@ function destroy(req, res) {
 module.exports = {
     index: index,
     show: show,
-    signup: signup,
+    create: create,
     update: update,
-    destroy: destroy
+    destroy: destroy,
+    avatar: avatar,
 }

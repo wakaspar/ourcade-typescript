@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { At, Envelope, Lock, Pencil, PersonCircle } from 'react-bootstrap-icons';
+import { At, CardImage, Envelope, Lock, Pencil, PersonCircle } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
@@ -15,6 +15,7 @@ const Profile = (props: ProfileProps) => {
   // Variable declaration:
   let params :any = useParams();
   // state getters/setters for <Profile />:
+  const [avatar, setAvatar] = useState(null);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('*********');
@@ -27,6 +28,7 @@ const Profile = (props: ProfileProps) => {
       setUsername(res.username);
       setEmail(res.email);
       setPassword(res.password);
+      setAvatar(res.avatar);
     },[]
   );
 
@@ -56,7 +58,6 @@ const Profile = (props: ProfileProps) => {
   // JSX rendered:
   return(
     <BigCard>
-      
       <div style={{display: "inline-flex"}}>
         <h2 style={{margin: "auto"}}>
           <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
@@ -69,22 +70,38 @@ const Profile = (props: ProfileProps) => {
           </button>
         </Link>
       </div>
-
-      
       <div>
         <br/>
-        <div className="form-group" style={{ display:"flex" }}>
-          <At size={25} />
-          <p>{ username }</p>
+
+        <div className="row mb-4">
+          <div className="col-6" style={{ display:"flex" }}>
+            <At size={25} style={{margin: "0 1.25%"}} />
+            <p>{ username }</p>
+          </div>
+          <div className="col-6" style={{ display:"flex" }}>
+            <Envelope size={25} style={{margin: "0 1.25%"}} />
+            <p>{ email }</p>
+          </div>
         </div>
-        <div className="form-group" style={{ display:"flex" }}>
-          <Envelope size={25} style={{marginRight: "4px"}} />
-          <p>{ email }</p>
+
+        <div className="row mb-4">
+          <div className="col-6" style={{ display:"flex" }}>
+            <Lock size={25} style={{margin: "0 1.25%"}} />
+            <p>{ password ? password : '*********' }</p>
+          </div>
+          <div className="col-6" style={{ display:"flex" }}>
+            <Lock size={25} style={{margin: "0 1.25%"}} />
+            <p>{ password ? password : '*********' }</p>
+          </div>
         </div>
-        <div className="form-group" style={{ display:"flex" }}>
-          <Lock size={25} />
-          <p>{ password }</p>
+
+        <div className="row mb-4">
+          <div className="col-6" style={{ display:"flex" }}>
+            <CardImage size={25} style={{margin: "0 1.25%"}} />
+            <p>{ avatar ? avatar : 'No avatar uploaded' }</p>
+          </div>
         </div>
+
       </div>
     </BigCard>
   );

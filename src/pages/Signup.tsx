@@ -29,6 +29,7 @@ const Signup = () => {
         username: username,
         password: password,
     }
+    console.log('Signup postSignup() newUser: ', newUser);
     axios.post('http://localhost:4000/api/signup', newUser)
     .then(result => {
       if (result.status === 200 || _isMounted.current) {
@@ -113,7 +114,7 @@ const Signup = () => {
           />
         </div>
       </div>
-      <button onClick={postSignup} className="btn btn-primary">Sign up</button>
+      <button onClick={postSignup} className="btn btn-dark">Sign up</button>
       </Form>
       <Link style={{margin: "3% 0"}} to='/login'>Already have an account?</Link>
       { isError && <Error>The username or password provided were incorrect!</Error> }

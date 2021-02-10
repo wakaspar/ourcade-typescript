@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Pencil, Plus, Globe } from 'react-bootstrap-icons';
+import { Pencil, Plus, Globe, People, Person, PersonFill, PeopleFill } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
@@ -23,10 +23,21 @@ interface ScoreProps {
 // <Score /> functional component definition:
 const Score = (props: ScoreProps) => (
   <tr>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score._player.username}</td>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_value}</td>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_game}</td>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_player_num}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : 'singleplayer'}>{props.score._player.username}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : 'singleplayer'}>{props.score.score_value}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : 'singleplayer'}>{props.score.score_game}</td>
+    <td className={props.score.score_multiplayer ? 'multiplayer' : 'singleplayer'}>
+      { props.score.score_multiplayer == false && (
+        <PersonFill color="black" size={25} />
+      )}
+      { props.score.score_multiplayer == true && (
+        <div style={{ display:"flex" }}>
+          <PeopleFill color="black" size={25} />
+          <p> #{ props.score.score_player_num } </p>
+        </div>
+      )}
+
+    </td>
     <td>
       <Link to={"/edit/" + props.score._id}>
         <Pencil color="black" size={25} />
@@ -39,8 +50,7 @@ const Score = (props: ScoreProps) => (
 const Scoreboard = () => {
   // Variable declaration; state getters/setters for <Scoreboard />:
   const [scores, setScores] = useState([]);
-  const [isMounted, setIsMounted] = useState(false);
-  const [loading, setloading] = useState(true)
+  const [loading, setloading] = useState(true);
   const [error, setError] = useState();
 
   // 'scoreList' function definition [maps scores to <Score /> component]:
@@ -50,32 +60,27 @@ const Scoreboard = () => {
     });
   };
 
-  // 'getScores' function definiton:
-  const getScores = useCallback( (mounted) => {
+  // 'getAllScores' function definiton:
+  const getAllScores = useCallback( () => {
     axios.get('http://localhost:4000/api/scores/')
     .then(res => {
-      if (mounted) {
-        setScores(res.data);
-        setIsMounted(true);
-        setloading(false);
-        console.log('scores: ', scores);     
-      }
+      setScores(res.data);
+      setloading(false);
     })
     .catch(err => {
       setError(err.message);
-      setIsMounted(true);
-      console.log('error: ', error);
+      setloading(false);
     })
-  },[error, scores]);
+    if (error) { console.log('error: ', error) }
+  },[error]);
 
   // 'useEffect' hook definition:
   useEffect(() => {
-    let mounted = true;
-    getScores(mounted);
+    getAllScores();
     return function cleanup() {
-      mounted = false
+      setloading(true);
     }
-  }, [isMounted, getScores]);
+  }, [getAllScores]);
 
   // JSX rendered:
   return (
@@ -105,7 +110,7 @@ const Scoreboard = () => {
           </tr>
         </thead>
         <tbody>
-            { loading ? <tr>retrieving scores...</tr> : null }
+            { loading ? <tr><td>retrieving scores...</td></tr> : null }
             { scoreList(scores) }
         </tbody>
       </table>

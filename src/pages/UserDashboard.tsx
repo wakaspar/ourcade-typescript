@@ -8,7 +8,7 @@ import { BigCard } from '../components/AuthForms';
 import * as Icons from 'react-bootstrap-icons';
 
 // TypeScript interfaces:
-interface UserDashProps {
+interface ScoreProps {
   score: { 
     _id: number;
     _player: any;
@@ -21,11 +21,19 @@ interface UserDashProps {
   history: any;
   match: any;
 }
+
+interface UserDashProps {
+  scores: any;
+  loading: boolean;
+  name: string;
+  error: string;
+}
+
 interface UserDashState {/* * */}
 
 
 // <Score /> functional component definition:
-const Score = (props: UserDashProps) => (
+const Score = (props: ScoreProps) => (
   <tr>
     <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score._player.username}</td>
     <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_value}</td>
@@ -81,11 +89,10 @@ const UserDashboard = (props: UserDashProps, state: UserDashState) => {
   const existingUserID = JSON.parse( localStorage.getItem('user') !);    
   // state getters/setters for <UserDashboard />:
   const [currentUserID] = useState(existingUserID);
-  const [scores, setScores]: any = useState([]);
-  const [isMounted, setIsMounted] = useState(false);
-  const [error, setError] = useState();
-  
-  const [name, setName]: any = useState('');
+  const [scores, setScores] = useState([]);
+  const [loading, setloading] = useState(true);
+  const [name, setName] = useState('');
+  const [error, setError] = useState('');
   
   // 'scoreList' function definition [maps scores to <Score /> component]:
   const scoreList = (scores: any) => {
@@ -99,24 +106,29 @@ const UserDashboard = (props: UserDashProps, state: UserDashState) => {
     axios.get(`http://localhost:4000/api/users/scores/${currentUserID}`)
     .then(res => {
       setScores(res.data);
-      setIsMounted(true);
       setUserHeader(res.data);
+      setloading(false);
+      
     })
     .catch(err => {
       setError(err.message);
-      setIsMounted(true);
+      setloading(false);
     })
     if (error) { console.log('error: ', error) }
   },[currentUserID, error]);
 
+  // 'setUserHeader' function definition:
   const setUserHeader = (scores: any) => {
     setName(scores[0]._player.username);
   }
 
   // 'useEffect' hook definition:
   useEffect(() => {
-    return getUserScores();
-  }, [getUserScores, isMounted]);
+    getUserScores();
+    return function cleanup() {
+      setloading(false);
+    }
+  }, [getUserScores, loading]);
     
   // JSX Rendered:
   return(

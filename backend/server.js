@@ -10,11 +10,25 @@ const express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
+    multer = require('multer'),
+    // upload = multer({ dest: './public/uploads/' }),
     PORT = 4000;
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
 
 // EXPRESS SERVER CONFIGURATION:
 // Config express middleware:
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser());
 // Config express-session:
 app.use(session({
@@ -65,8 +79,8 @@ app.delete('/api/scores/', controllers.score.destroyAll);
 // User routes:
 app.get('/api/users', controllers.user.index);
 app.get('/api/users/:id', controllers.user.show);
-app.post('/api/signup', controllers.user.signup);
-app.put('/api/users/:id', controllers.user.update);
+app.post('/api/signup', controllers.user.create);
+app.put('/api/users/:id', upload.single('avatar'), controllers.user.update);
 app.delete('/api/users/:id', controllers.user.destroy);
 // Auth routes:
 app.post('/api/login', passport.authenticate('local'), controllers.auth.login);
