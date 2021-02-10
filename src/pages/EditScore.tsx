@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
 import DeleteScore from "./DeleteScore";
 import { useParams } from 'react-router-dom';
-import { Controller, Pencil, Trophy } from 'react-bootstrap-icons';
+import { Controller, GearFill, Pencil, Trophy } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
@@ -116,7 +116,7 @@ const EditScore = (props: EditScoreProps, state: EditScoreState) => {
   <BigCard>
     <div style={{display: "inline-flex"}}>
       <h2 style={{margin: "auto"}}>
-        <Pencil style={{margin: "0px 3px 5px 0px"}} />
+        <GearFill style={{margin: "0px 3px 5px 0px"}} />
         Edit score
       </h2>
     </div>

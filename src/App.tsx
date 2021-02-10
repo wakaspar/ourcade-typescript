@@ -22,7 +22,8 @@ import { Globe,
          PersonPlusFill, 
          BoxArrowInRight, 
          PlusCircle,
-         BoxArrowLeft} from 'react-bootstrap-icons';
+         BoxArrowLeft,
+         BoxArrowRight} from 'react-bootstrap-icons';
 import './App.css';
 import icon from "./pins-icon.png"
 import axios from 'axios';
@@ -143,7 +144,7 @@ function App(props :AppProps, state: AppState)  {
                     </li>
                     <li className="navbar-item">
                       <button onClick={logout} className="btn btn-dark btn-sm">
-                        <BoxArrowLeft style={{margin: "0px 8px 4px 0px"}} />
+                        <BoxArrowRight style={{margin: "0px 4px 4px 0px"}} />
                         Log out
                       </button>
                     </li>

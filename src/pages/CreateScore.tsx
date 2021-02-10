@@ -28,6 +28,7 @@ const CreateScore = (props: CreateScoreProps, state: CreateScoreState) => {
     const [scoreMultiplayer, setScoreMultiplayer] = useState(false);
     const [scorePlayerNum, setScorePlayerNum] = useState('1');
     const [multiToggle, setMultiToggle] = useState('');
+    // const [multiToggleIcon, setMultiToggleIcon] = useState(null);
     // error handling & clean-up variables:
     const [error, setError] = useState();
     const [isMounted, setIsMounted] = useState(false);

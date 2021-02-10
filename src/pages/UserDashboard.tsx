@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Pencil, Plus } from 'react-bootstrap-icons';
+import { Pencil, Plus, GearFill, PeopleFill, PersonFill } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 import * as Icons from 'react-bootstrap-icons';
@@ -35,13 +35,22 @@ interface UserDashState {/* * */}
 // <Score /> functional component definition:
 const Score = (props: ScoreProps) => (
   <tr>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score._player.username}</td>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_value}</td>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_game}</td>
-    <td className={props.score.score_multiplayer ? 'multiplayer' : ''}>{props.score.score_player_num}</td>
+    <td>{ props.score._player.username }</td>
+    <td>{ props.score.score_value }</td>
+    <td>{ props.score.score_game }</td>
+    <td>{ props.score.score_multiplayer == false && (
+        <PersonFill color="black" size={25} />
+      )}
+      { props.score.score_multiplayer == true && (
+        <div style={{ display:"flex" }}>
+          <PeopleFill color="black" size={25} />
+          <p>#{ props.score.score_player_num }</p>
+        </div>
+      )}
+    </td>
     <td>
       <Link to={"/edit/" + props.score._id}>
-        <Pencil color="black" size={25} />
+        <GearFill color="black" size={25} />
       </Link>
     </td> 
   </tr>
@@ -137,11 +146,11 @@ const UserDashboard = (props: UserDashProps, state: UserDashState) => {
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Score Value</th>
+            <th>User</th>
+            <th>High score</th>
             <th>Game</th>
             <th>P</th>
-            <th>Edit</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

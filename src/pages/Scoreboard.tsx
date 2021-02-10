@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Pencil, Plus, Globe, People, Person, PersonFill, PeopleFill } from 'react-bootstrap-icons';
+import { Pencil, Plus, Globe, People, Person, PersonFill, PeopleFill, GearFill } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
@@ -36,11 +36,10 @@ const Score = (props: ScoreProps) => (
           <p> #{ props.score.score_player_num } </p>
         </div>
       )}
-
     </td>
     <td>
       <Link to={"/edit/" + props.score._id}>
-        <Pencil color="black" size={25} />
+        <GearFill color="black" size={25} />
       </Link>
     </td>
   </tr>
@@ -102,11 +101,11 @@ const Scoreboard = () => {
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Score Value</th>
+            <th>User</th>
+            <th>High score</th>
             <th>Game</th>
             <th>P</th>
-            <th>Edit</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

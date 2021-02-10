@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState, } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { At, CardImage, Envelope, Lock, Pencil, PersonCircle } from 'react-bootstrap-icons';
+import { At, CardImage, Envelope, Gear, GearFill, Lock, Pencil, PersonCircle } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 // TypeScript interfaces:
@@ -65,7 +65,7 @@ const Profile = (props: ProfileProps) => {
         </h2>
         <Link to={"/user/edit/" + params.id} className="nav-link">
           <button className="btn btn-dark btn-sm">
-            <Pencil size={18} style={{margin: "0px 4px 4px 0px"}} />
+            <Gear size={18} style={{margin: "0px 5px 2px 0px"}} />
             Edit profile
           </button>
         </Link>
