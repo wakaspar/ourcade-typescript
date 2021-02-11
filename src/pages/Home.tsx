@@ -6,7 +6,6 @@ import { InfoCircleFill } from 'react-bootstrap-icons';
 // Backgronud images:
 import captainFantastic from "../cap.png";
 import laserball from "../laserball.png";
-import captainFantastic2 from "../cap2.png";
 import paragon from "../paragon.png";
 import lucky7 from "../lucky7.png";
 
@@ -23,7 +22,7 @@ const Home = (props: HomeProps, state: HomeState) => {
   return(
     <div>
       <main>
-        <div style={{ backgroundImage: `url(${captainFantastic2})`}} className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light bg-box">
+        <div style={{ backgroundImage: `url(${captainFantastic})`}} className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light bg-box">
           <div className="col-md-5 p-lg-5 mx-auto my-5">
             <h1 className="display-4 display-text">Record Your High Scores</h1>
             <p className="lead text-white box-text">And see some cool data about your mad pinball skillz.</p>
