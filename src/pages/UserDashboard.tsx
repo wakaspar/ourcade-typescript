@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Pencil, Plus, GearFill, PeopleFill, PersonFill } from 'react-bootstrap-icons';
+import { Plus, GearFill, PeopleFill, PersonFill } from 'react-bootstrap-icons';
 import { BigCard } from '../components/AuthForms';
 
 import * as Icons from 'react-bootstrap-icons';
@@ -142,7 +142,7 @@ const UserDashboard = (props: UserDashProps, state: UserDashState) => {
   // JSX Rendered:
   return(
     <BigCard>
-      <UserHeader name={ name } text={ "Dashboard" } icon={'BarChartLineFill'} />
+      <UserHeader name={ name } text={ "Dashboard" } icon={'GraphUp'} />
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>

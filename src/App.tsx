@@ -23,7 +23,8 @@ import { Globe,
          BoxArrowInRight, 
          PlusCircle,
          BoxArrowLeft,
-         BoxArrowRight} from 'react-bootstrap-icons';
+         BoxArrowRight,
+         GraphUp} from 'react-bootstrap-icons';
 import './App.css';
 import icon from "./pins-icon.png"
 import axios from 'axios';
@@ -127,7 +128,13 @@ function App(props :AppProps, state: AppState)  {
                     <li className="navbar-item">
                       <Link to="/scores" className="nav-link">
                         <Globe style={{margin: "0px 3px 5px 0px"}} />
-                        Scoreboard
+                        Global scoreboard
+                      </Link>
+                    </li>
+                    <li className="navbar-item">
+                      <Link to={"/user/" + currentUserID + "/dash/"} className="nav-link">
+                        <GraphUp style={{margin: "0px 3px 5px 0px"}} />
+                        {username}'s scoreboard
                       </Link>
                     </li>
                     <li className="navbar-item">
@@ -136,8 +143,9 @@ function App(props :AppProps, state: AppState)  {
                         Add a score
                       </Link>
                     </li>
+
                     <li className="navbar-item">
-                      <Link to={"/profile/" + currentUserID} className="nav-link">
+                      <Link to={"/user/" + currentUserID} className="nav-link">
                         <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
                         {username}
                       </Link>
@@ -152,8 +160,9 @@ function App(props :AppProps, state: AppState)  {
                 </div>
               </nav>
               <br/>
-              <Route exact path="/" component={UserDashboard} />                
-              <PrivateRoute path="/profile/:id" component={Profile} />
+              <Route exact path="/" component={Home} />                
+              <PrivateRoute path="/user/:id/dash" component={UserDashboard} />                
+              <PrivateRoute exact path="/user/:id" component={Profile} />
               <PrivateRoute path="/user/edit/:id" component={EditUser} />
               <PrivateRoute path="/scores" component={Scoreboard} />
               <PrivateRoute path="/create" component={CreateScore} />

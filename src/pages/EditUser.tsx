@@ -17,7 +17,7 @@ const EditUser = (props: EditUserProps) => {
   // Variable declaration:
   let params: any = useParams();
   // state getters/setters for <EditUser/>:
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState();
   const [email, setEmail] = useState('');
   const [error, setError] = useState();
   const [isMounted, setIsMounted] = useState(false);
@@ -80,6 +80,8 @@ const EditUser = (props: EditUserProps) => {
     console.log('editUser before PUT: ', editUser);
     debugger;
     axios.put(`http://localhost:4000/api/users/${params.id}`, editUser)
+    // axios.post(`http://localhost:4000/api/users/${params.id}`, editUser)
+    console.log('editUser after PUT: ', editUser);
     // redirect after PUT:
     let path = 'http://localhost:3000/profile/' + params.id;
     window.location.href = path;
@@ -98,14 +100,17 @@ const EditUser = (props: EditUserProps) => {
           <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
           { username }'s profile
         </h2>
-        <Link to={"/profile/" + params.id} className="nav-link">
+        <Link to={"/user/" + params.id} className="nav-link">
           <button className="btn btn-dark btn-sm">
           <X size={20} style={{margin: "0px 3px 1px 0px"}} />
           Cancel
           </button>
         </Link>
       </div>
-      <form onSubmit={onSubmit} encType="multipart/form-data">
+      <form action={`http://localhost:4000/api/users/${params.id}`} 
+            onSubmit={onSubmit} 
+            method="POST" 
+            encType="multipart/form-data">
         <br/>
         <div className="form-group row mb-4">
           <div className="col-6" style={{ display:"flex" }}>
@@ -155,7 +160,7 @@ const EditUser = (props: EditUserProps) => {
 
 
         <div className="form-group">
-          <input type="submit" value="Edit Profile" className="btn btn-dark" style={{marginRight: 10}} />
+          <input type="submit" value="Save" className="btn btn-dark" style={{marginRight: 10}} />
           <DeleteUser user={props.match.params.id} unmount={handleDeleteUser} />
         </div>
       </form>

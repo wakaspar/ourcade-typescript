@@ -3,3 +3,31 @@ footer {
   flex: 1;
   padding-bottom: 1.5em;
 }
+
+Link, a {
+  color: black !important; 
+}
+
+.box-text {
+  font-weight: 600;
+  text-shadow:
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.bg-box {
+  margin: .35%;
+  border-radius: 10px;
+  background-position: center;
+}
+
+.display-text {
+  font-weight: 600;
+  text-shadow:
+  -1px -1px 0 #fff,  
+   1px -1px 0 #fff,
+   -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}

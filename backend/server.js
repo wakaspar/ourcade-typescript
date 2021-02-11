@@ -2,6 +2,7 @@
 const express = require('express'),
     app = express(),
     db = require('./models'),
+    path = require('path'),
     controllers = require('./controllers'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
@@ -11,24 +12,35 @@ const express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     multer = require('multer'),
-    // upload = multer({ dest: './public/uploads/' }),
-    PORT = 4000;
+    upload = multer({ dest: './uploads' }),
+    PORT = 4000,
+    User = db.User;
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
 
-var upload = multer({ storage: storage })
+// MULTER IMAGE UPLOAD CONFIGURATION:
+// config multer diskStorage:
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     let filename = 'avatar';
+//     req.body.file = filename;
+//     cb(null, filename + '-' + Date.now())
+//     // cb(null, file.fieldname + '-' + Date.now())
+    
+//   }
+// })
+// config multer upload options:
+// var upload = multer({ 
+//   storage: storage,
+//   limits:{fileSize: 1000000},
+// })
 
 // EXPRESS SERVER CONFIGURATION:
 // Config express middleware:
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(cookieParser());
 // Config express-session:
 app.use(session({
@@ -57,7 +69,13 @@ app.use(function (req, res, next) {
 
 // MONGODB INSTANCE CONNECTION:
 // Connect to database:
-mongoose.createConnection('mongodb://127.0.0.1:27017/ourcade-ts', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.createConnection('mongodb://127.0.0.1:27017/ourcade-ts', 
+  { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  }
+);
 const connection = mongoose.connection;
 // Database sanity check:
 connection.once('open', function() {
@@ -81,6 +99,9 @@ app.get('/api/users', controllers.user.index);
 app.get('/api/users/:id', controllers.user.show);
 app.post('/api/signup', controllers.user.create);
 app.put('/api/users/:id', upload.single('avatar'), controllers.user.update);
+app.post('/api/users/:id', upload.single('avatar'), controllers.user.avatar);
+
+
 app.delete('/api/users/:id', controllers.user.destroy);
 // Auth routes:
 app.post('/api/login', passport.authenticate('local'), controllers.auth.login);

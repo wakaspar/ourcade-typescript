@@ -24,7 +24,6 @@ function show(req, res) {
 }
 // Add a new user:
 function create(req, res) {
-    console.log('BEFORE CREATE - REQ.BODY: ', req.body);
     User
     .register(
         new User({ username: req.body.username, email: req.body.email, avatar: null }), req.body.password,
@@ -36,7 +35,8 @@ function create(req, res) {
         }
     )
 }
-// Update one user by [:id]:
+
+// PUT - Update one user by [:id]:
 function update(req, res, next) {
     console.log('BEFORE UPDATE - REQ.BODY: ', req.body);
     console.log('BEFORE UPDATE - REQ.FILE: ', req.file);
@@ -44,7 +44,7 @@ function update(req, res, next) {
     User
     .findById(id, function(err, user) {
         if (!user)
-            res.status(404).send('User not found: ', err);
+            res.status(404).send(err);
         else
             user.username = req.body.username;
             user.email = req.body.email;
@@ -53,30 +53,34 @@ function update(req, res, next) {
                 res.status(400).json(user);
             })
             .catch(err => {
-                res.status(400).send('Failed to update user - err: ', err);
+                res.status(400).send(err);
+                err ? console.log('err: ', err) : null;
             });
     });
 }
-// Upload new user avatar:
+// POST - Same as update:
 function avatar(req, res, next) {
-    console.log('BEFORE AVATAR - REQ.BODY: ', req.body);
     console.log('BEFORE AVATAR - REQ.BODY: ', req.body);
     console.log('BEFORE AVATAR - REQ.FILE: ', req.file);
     let id = mongoose.Types.ObjectId(req.params.id);
     User
     .findById(id, function(err, user) {
         if (!user)
-            res.status(404).send(err);
+            res.status(404).send(err)
         else
-            user.avatar = req.avatar;
+            user.username = req.body.username;
+            user.email = req.body.email;
+            user.avatar = req.body.avatar;
             user.save().then(user => {
                 res.status(400).json(user);
             })
             .catch(err => {
                 res.status(400).send(err);
+                err ? console.log('err: ', err) : null;
             });
     });
 }
+
 // Delete one user by [:id]:
 function destroy(req, res) {
     let id = mongoose.Types.ObjectId(req.params.id);
@@ -88,7 +92,7 @@ function destroy(req, res) {
             res.status(200).json({'User deleted: ': user});
         })
         .catch(err => {
-            res.status(400).send('Failed to delete user: ', err);
+            res.status(400).send(err);
         })
     });
 }
