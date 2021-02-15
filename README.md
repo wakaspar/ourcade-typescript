@@ -4,17 +4,53 @@ This project is still in development.
 
 Ourcade is a React TypeScript application with the end-goal of supporting user-curated scoreboards regarding pinball and arcade cabinet games.  The idea was born out of many conversations with fellow pinball and arcade gamers, as we discussed what sort of features we would like to see in an application to support our favorite hobby.  When I started learning TypeScript, I took a look at this idea again with the intention of building it out as a self-developed, self-supported, widely available web application.
 
-Currently, we can CRUD users and scores, login/logout, and view an admin scoreboard which includes all current user scores.
+Currently, we can CRUD users and scores, login/logout, and view an admin scoreboard which includes all current user scores.  We also have user-facing scoreboards implemented as well as some form validation with the rest to follow soon.
 
 Lots of features are still in design or development, including:
-- user-facing scoreboard views
-- form validation
 - social features & leagues
 - personal score analytics
 - location-based score support
 - score image support
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Images
+Here are some images of recent development builds:
+
+### Homepage:
+
+Nav / Home:
+![home1](https://github.com/wakaspar/ourcade-typescript/blob/master/home1.jpg?raw=true)
+Features:
+![home2](https://github.com/wakaspar/ourcade-typescript/blob/master/home2.jpg?raw=true)
+
+### Login/Signup:
+
+Login:
+![login](https://github.com/wakaspar/ourcade-typescript/blob/master/login.jpg?raw=true)
+Signup:
+![signup](https://github.com/wakaspar/ourcade-typescript/blob/master/signup.jpg?raw=true)
+
+### Global & User Scoreboards:
+
+Global Scoreboard:
+![globalScoreboard](https://github.com/wakaspar/ourcade-typescript/blob/master/globalScoreboard.jpg?raw=true)
+User Scoreboard:
+![userScoreboard](https://github.com/wakaspar/ourcade-typescript/blob/master/userScoreboard.jpg?raw=true)
+
+### Profile & EditUser views:
+
+Profile:
+![profile](https://github.com/wakaspar/ourcade-typescript/blob/master/profile.jpg?raw=true)
+EditUser component:
+![editUser](https://github.com/wakaspar/ourcade-typescript/blob/master/editUser.jpg?raw=true)
+
+## Score CRUD views:
+
+Add new score form:
+![newScore](https://github.com/wakaspar/ourcade-typescript/blob/master/newScore.jpg?raw=true)
+Edit score form:
+![editScore](https://github.com/wakaspar/ourcade-typescript/blob/master/editScore.jpg?raw=true)
 
 ## Available Scripts
 
