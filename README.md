@@ -91,7 +91,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### `node backend/server`
 
-Run `node backend/server` command in terminal to run the Node.js server & connect to a MongoDB database isntance.
+Run `node backend/server` command in terminal to run the Node.js server & connect to a MongoDB database instance.
 
 ## Learn More
 
