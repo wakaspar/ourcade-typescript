@@ -41,7 +41,7 @@ User Scoreboard:
 ### Profile & EditUser views:
 
 Profile:
-![profile](https://raw.githubusercontent.com/wakaspar/ourcade-typescript/master/public/readme/profile.png)
+![profile](https://raw.githubusercontent.com/wakaspar/ourcade-typescript/master/public/readme/userProfile.png)
 EditUser component:
 ![editUser](https://raw.githubusercontent.com/wakaspar/ourcade-typescript/master/public/readme/editUser.png)
 
