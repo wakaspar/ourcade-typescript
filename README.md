@@ -20,37 +20,37 @@ Here are some images of recent development builds:
 ### Homepage:
 
 Nav / Home:
-![home1](https://github.com/wakaspar/ourcade-typescript/blob/master/home1.jpg?raw=true)
+![home1](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/home1.jpg?raw=true)
 Features:
-![home2](https://github.com/wakaspar/ourcade-typescript/blob/master/home2.jpg?raw=true)
+![home2](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/home2.jpg?raw=true)
 
 ### Login/Signup:
 
 Login:
-![login](https://github.com/wakaspar/ourcade-typescript/blob/master/login.jpg?raw=true)
+![login](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/login.jpg?raw=true)
 Signup:
-![signup](https://github.com/wakaspar/ourcade-typescript/blob/master/signup.jpg?raw=true)
+![signup](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/signup.jpg?raw=true)
 
 ### Global & User Scoreboards:
 
 Global Scoreboard:
-![globalScoreboard](https://github.com/wakaspar/ourcade-typescript/blob/master/globalScoreboard.jpg?raw=true)
+![globalScoreboard](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/globalScoreboard.jpg?raw=true)
 User Scoreboard:
-![userScoreboard](https://github.com/wakaspar/ourcade-typescript/blob/master/userScoreboard.jpg?raw=true)
+![userScoreboard](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/userScoreboard.jpg?raw=true)
 
 ### Profile & EditUser views:
 
 Profile:
-![profile](https://github.com/wakaspar/ourcade-typescript/blob/master/profile.jpg?raw=true)
+![profile](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/profile.jpg?raw=true)
 EditUser component:
-![editUser](https://github.com/wakaspar/ourcade-typescript/blob/master/editUser.jpg?raw=true)
+![editUser](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/editUser.jpg?raw=true)
 
 ## Score CRUD views:
 
 Add new score form:
-![newScore](https://github.com/wakaspar/ourcade-typescript/blob/master/newScore.jpg?raw=true)
+![newScore](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/newScore.jpg?raw=true)
 Edit score form:
-![editScore](https://github.com/wakaspar/ourcade-typescript/blob/master/editScore.jpg?raw=true)
+![editScore](https://github.com/wakaspar/ourcade-typescript/blob/master/public/readme/editScore.jpg?raw=true)
 
 ## Available Scripts
 
