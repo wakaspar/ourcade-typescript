@@ -86,14 +86,10 @@ const Home = (props: HomeProps, state: HomeState) => {
             <h5>Site Map</h5>
             <ul className="list-unstyled text-small">
               <li>
-                <Link to="/login/">
-                  <a className="link-secondary" href="/login">Login</a>
-                </Link>
+                <Link className="link-secondary" to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/login/">
-                  <a className="link-secondary" href="/signup">Signup</a>
-                </Link>
+                <Link className="link-secondary" to="/signup">Signup</Link>
               </li>
             </ul>
           </div>

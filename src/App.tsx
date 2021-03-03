@@ -124,37 +124,34 @@ function App(props :AppProps, state: AppState)  {
                 </div>
                 <div className="collpase navbar-collapse">
                   <ul className="navbar-nav mr-auto">
+                  <li className="navbar-item">
+                      <Link to="/create" className="nav-link">
+                        <PlusCircle className="nav-icon"/>
+                        Add a score
+                      </Link>
+                    </li>
                     <li className="navbar-item">
                       <Link to="/scores" className="nav-link">
-                        <Globe style={{margin: "0px 3px 5px 0px"}} />
+                        <Globe className="nav-icon"/>
                         Global scoreboard
                       </Link>
                     </li>
                     <li className="navbar-item">
                       <Link to={"/user/" + currentUserID + "/dash/"} className="nav-link">
-                        <GraphUp style={{margin: "0px 3px 5px 0px"}} />
+                        <GraphUp className="nav-icon"/>
                         {username}'s scoreboard
                       </Link>
                     </li>
                     <li className="navbar-item">
-                      <Link to="/create" className="nav-link">
-                        <PlusCircle size={15} style={{margin: "0px 3px 5px 0px"}}/>
-                        Add a score
-                      </Link>
-                    </li>
-
-                    <li className="navbar-item">
                       <Link to={"/user/" + currentUserID} className="nav-link">
-                        <PersonCircle style={{margin: "0px 3px 5px 0px"}} />
+                        <PersonCircle className="nav-icon"/>
                         {username}
                       </Link>
-                    </li>
-                    <li className="navbar-item">
-                      <button onClick={logout} className="btn btn-dark btn-sm">
-                        <BoxArrowRight style={{margin: "0px 4px 4px 0px"}} />
-                        Log out
-                      </button>
-                    </li>
+                    </li>                    
+                    <button onClick={logout} className="btn btn-dark btn-sm">
+                      <BoxArrowRight className="nav-logout-icon"/>
+                      Logout
+                    </button>
                   </ul>
                 </div>
               </nav>
@@ -168,7 +165,7 @@ function App(props :AppProps, state: AppState)  {
               <PrivateRoute path="/edit/:id" component={EditScore} />
             </div>
             <footer>
-              <p style={{margin: "1% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
+              <p>&copy; 2021 Friendly Ghost Industries</p>
             </footer>
           </main>
         </Router>
@@ -189,13 +186,13 @@ function App(props :AppProps, state: AppState)  {
                   <ul className="navbar-nav mr-auto">
                   <li className="navbar-item">
                     <Link to="/login" className="nav-link">
-                      <BoxArrowInRight style={{margin: "0px 3px 5px 0px"}} />
+                      <BoxArrowInRight   />
                       Login
                     </Link>
                   </li>
                   <li className="navbar-item">
                     <Link to="/signup" className="nav-link">
-                      <PersonPlusFill style={{margin: "0px 3px 5px 0px"}} />
+                      <PersonPlusFill   />
                       Sign up
                     </Link>
                   </li>
@@ -208,7 +205,7 @@ function App(props :AppProps, state: AppState)  {
               <Route path="/signup" component={Signup} />
             </div>
             <footer>
-              <p style={{margin: "1% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
+              <p>&copy; 2021 Friendly Ghost Industries</p>
             </footer>
           </main>
         </Router>

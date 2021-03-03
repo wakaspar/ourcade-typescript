@@ -1,10 +1,17 @@
+
+
 footer {
   text-align: center;
   flex: 1;
   padding-bottom: 1.5em;
 }
 
+footer p {
+  margin: 1% 0 !important;
+}
+
 main {
+  /* background-color: black !important; */
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -12,6 +19,14 @@ main {
 
 Link, a {
   color: black !important; 
+}
+
+.nav-icon {
+  margin: 0px 3px 5px 0px !important;
+}
+
+.nav-logout-icon {
+  margin: 0px 10px 2px 0px !important;
 }
 
 .box-text {
@@ -24,8 +39,7 @@ Link, a {
 }
 
 .bg-box {
-  margin: .35%;
-  border-radius: 10px;
+  margin: 0 !important;
   background-position: center;
 }
 
