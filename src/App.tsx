@@ -22,7 +22,6 @@ import { Globe,
          PersonPlusFill, 
          BoxArrowInRight, 
          PlusCircle,
-         BoxArrowLeft,
          BoxArrowRight,
          GraphUp} from 'react-bootstrap-icons';
 import './App.css';
@@ -117,8 +116,8 @@ function App(props :AppProps, state: AppState)  {
     return (    
       <AuthContext.Provider value={ { authTokens, setAuthTokens: setTokens } }>
          <Router>
-          <div>
-            <div className="container">
+          <main className="container-fluid">
+            <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <div className="oc-title">
                  <Link to="/" className="navbar-brand"><img src={icon} alt="OC-TS" />Ourcade</Link>
@@ -169,9 +168,9 @@ function App(props :AppProps, state: AppState)  {
               <PrivateRoute path="/edit/:id" component={EditScore} />
             </div>
             <footer>
-              <p style={{margin: "3% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
+              <p style={{margin: "1% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
             </footer>
-          </div>
+          </main>
         </Router>
       </AuthContext.Provider>
     );
@@ -180,8 +179,8 @@ function App(props :AppProps, state: AppState)  {
     return (
       <AuthContext.Provider value={ { authTokens, setAuthTokens: setTokens } }>
         <Router>
-          <div>
-            <div className="container">
+          <main className="container-fluid">
+            <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="oc-title">
                  <Link to="/" className="navbar-brand"><img src={icon} alt="OC-TS" />Ourcade</Link>
@@ -209,9 +208,9 @@ function App(props :AppProps, state: AppState)  {
               <Route path="/signup" component={Signup} />
             </div>
             <footer>
-              <p style={{margin: "3% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
+              <p style={{margin: "1% 0"}}>&copy; 2021 Friendly Ghost Industries</p>
             </footer>
-          </div>
+          </main>
         </Router>
       </AuthContext.Provider>
     )

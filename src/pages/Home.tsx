@@ -32,7 +32,7 @@ const Home = (props: HomeProps, state: HomeState) => {
             </Link>
             )}
           </div>
-          <p className="lead text-white box-text">And yeah, that's totally Elton John's butt.</p>
+          {/* <p className="lead text-white box-text">And yeah, that's totally Elton John's butt.</p> */}
         </div>
         <div className="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
           <div style={{ backgroundImage: `url(${laserball})`}} className="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden bg-box">
@@ -80,7 +80,7 @@ const Home = (props: HomeProps, state: HomeState) => {
 
       </main>
 
-      <footer className="container py-5">
+      <footer className="container py-3">
         <div className="row">
           <div className="col-6 col-md">
             <h5>Site Map</h5>
