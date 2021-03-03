@@ -27,8 +27,8 @@ const Home = (props: HomeProps, state: HomeState) => {
             <h1 className="display-4 display-text">Record Your High Scores</h1>
             <p className="lead text-white box-text">And see some cool data about your mad pinball skillz.</p>
             { !authTokens && (
-            <Link to="/signup/">
-              <a className="btn btn-light" href="#">Sign up</a>
+            <Link className="btn btn-light" to="/signup/">
+              Sign up
             </Link>
             )}
           </div>
