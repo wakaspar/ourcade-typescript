@@ -21,6 +21,15 @@ Link, a {
   color: black !important; 
 }
 
+.laserball, .blackKnight, .lucky7, .paragon {
+  margin: 0 !important;
+  background-position: center;
+}
+
+.laserball {
+  background-size: cover;
+}
+
 .nav-icon {
   margin: 0px 3px 5px 0px !important;
 }
@@ -38,16 +47,11 @@ Link, a {
     1px 1px 0 #000;
 }
 
-.bg-box {
-  margin: 0 !important;
-  background-position: center;
-}
-
 .display-text {
   font-weight: 600;
   text-shadow:
-  -1px -1px 0 #fff,  
-   1px -1px 0 #fff,
-   -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  -2px -2px 0 #000,  
+   2px -2px 0 #000,
+   -2px 2px 0 #000,
+    2px 2px 0 #000;
 }

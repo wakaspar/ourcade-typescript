@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BigCard } from '../components/AuthForms';
-import { InfoCircleFill } from 'react-bootstrap-icons';
+import { InfoCircleFill, MapFill, RssFill } from 'react-bootstrap-icons';
 // Backgronud images:
 import captainFantastic from "../cap.png";
+import blackKnight from "../blackKnight.png";
 import laserball from "../laserball.png";
 import paragon from "../paragon.png";
 import lucky7 from "../lucky7.png";
@@ -22,7 +23,7 @@ const Home = (props: HomeProps, state: HomeState) => {
   return(
     <div>
       <main>
-        <div style={{ backgroundImage: `url(${captainFantastic})`}} className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light bg-box">
+        <div style={{ backgroundImage: `url(${laserball})`}} className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-white bg-light laserball">
           <div className="col-md-5 p-lg-5 mx-auto my-5">
             <h1 className="display-4 display-text">Record Your High Scores</h1>
             <p className="lead text-white box-text">And see some cool data about your mad pinball skillz.</p>
@@ -35,32 +36,31 @@ const Home = (props: HomeProps, state: HomeState) => {
           {/* <p className="lead text-white box-text">And yeah, that's totally Elton John's butt.</p> */}
         </div>
         <div className="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-          <div style={{ backgroundImage: `url(${laserball})`}} className="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden bg-box">
+          <div style={{ backgroundImage: `url(${blackKnight})`}} className="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden blackKnight">
             <div className="my-3 py-3 ">
-              <h2 className="display-5 box-text">Personalized Scoreboards</h2>
-              <p className="lead box-text">Record your high scores in a user friendly scoreboard.</p>
+              <h2 className="display-5 display-text">Personalized Scoreboards</h2>
+              <p className="lead box-text">Track your scores from a user friendly dashboard.</p>
             </div>
           </div>
-          <div style={{backgroundImage: `url(${lucky7})`}} className="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden box-text bg-box">
+          <div style={{backgroundImage: `url(${lucky7})`}} className="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden box-text lucky7">
             <div className="my-3 p-3">
-              <h2 className="display-5">Create Leagues</h2>
-              <p className="lead box-text">Make a league and compare scores with your friends.</p>
+              <h2 className="display-5 display-text">Create Leagues</h2>
+              <p className="lead box-text">Make leagues and compare scores with your friends.</p>
               <p className="lead box-text">COMING SOON</p>
             </div>
           </div>
-          <div style={{backgroundImage: `url(${paragon})`}} className="bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden box-text bg-box">
+          <div style={{backgroundImage: `url(${paragon})`}} className="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden box-text paragon">
             <div className="my-3 py-3">
-              <h2 className="display-5">User Analytics</h2>
+              <h2 className="display-5 display-text">User Analytics</h2>
               <p className="lead box-text">Know what, when, and where you play best.</p>
               <p className="lead box-text">COMING SOON</p>
             </div>
           </div>
         </div>
 
-        <br/>
         <BigCard> 
           <h5>
-            <InfoCircleFill style={{margin: "0px 3px 5px 0px"}}/>
+            <InfoCircleFill className="nav-icon"/>
             Welcome to Ourcade
           </h5>
           <p>
@@ -77,39 +77,50 @@ const Home = (props: HomeProps, state: HomeState) => {
             , please reach out via the <strong>Contact Us</strong> link below.
           </p>
         </BigCard>
-
       </main>
+      <br/>
+      <BigCard>
+        <footer className="container py-3">
+          <div className="row">
+            <div className="col-6 col-md">
+              <h5>
+                <MapFill className="nav-icon"/>
+                Site Map
+              </h5>
+              <ul className="list-unstyled text-small">
+                <li>
+                  <Link className="link-secondary" to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link className="link-secondary" to="/signup">Signup</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="col-6 col-md">
+              <h5>
+                <RssFill className="nav-icon"/>
+                Social
+              </h5>
+              <ul className="list-unstyled text-small">
+                <li>
+                  <a className="link-secondary" href="http://www.instagram.com/wakaspar" target="_blank">Instagram</a>
+                </li>
+                <li><a className="link-secondary" href="http://www.github.com/wakaspar/ourcade-typescript" target="_blank">Github</a></li>
+              </ul>
+            </div>
+            <div className="col-6 col-md">
+              <h5>
+                <InfoCircleFill className="nav-icon"/>
+                About
+              </h5>
+              <ul className="list-unstyled text-small">
+                <li><a className="link-secondary" href="mailto:wakaspar@gmail.com" target="_blank">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </BigCard>
 
-      <footer className="container py-3">
-        <div className="row">
-          <div className="col-6 col-md">
-            <h5>Site Map</h5>
-            <ul className="list-unstyled text-small">
-              <li>
-                <Link className="link-secondary" to="/login">Login</Link>
-              </li>
-              <li>
-                <Link className="link-secondary" to="/signup">Signup</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="col-6 col-md">
-            <h5>Social</h5>
-            <ul className="list-unstyled text-small">
-              <li>
-                <a className="link-secondary" href="http://www.instagram.com/wakaspar" target="_blank">Instagram</a>
-              </li>
-              <li><a className="link-secondary" href="http://www.github.com/wakaspar/ourcade-typescript" target="_blank">Github</a></li>
-            </ul>
-          </div>
-          <div className="col-6 col-md">
-            <h5>About</h5>
-            <ul className="list-unstyled text-small">
-              <li><a className="link-secondary" href="mailto:wakaspar@gmail.com" target="_blank">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     </div>
     );
