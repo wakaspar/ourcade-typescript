@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { BigCard } from '../components/AuthForms';
 import { InfoCircleFill, MapFill, RssFill } from 'react-bootstrap-icons';
 // Backgronud images:
-import captainFantastic from "../cap.png";
-import blackKnight from "../blackKnight.png";
-import laserball from "../laserball.png";
-import paragon from "../paragon.png";
-import lucky7 from "../lucky7.png";
+import captainFantastic from "../img/cap.png";
+import blackKnight from "../img/blackKnight.png";
+import laserball from "../img/laserball.png";
+import paragon from "../img/paragon.png";
+import lucky7 from "../img/lucky7.png";
 
 
 // TypeScript interfaces:

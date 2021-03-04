@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 // import logo from '../logo.svg';
 import { Link, useParams } from 'react-router-dom';
-import { At, CardImage, Envelope, FileEarmarkFill, Lock, PersonCircle, X } from 'react-bootstrap-icons';
+import { At, CardImage, Envelope, Lock, PersonCircle, X } from 'react-bootstrap-icons';
 import axios from 'axios';
 import DeleteUser from './DeleteUser';
 import { BigCard } from '../components/AuthForms';

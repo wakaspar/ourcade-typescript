@@ -25,7 +25,7 @@ import { Globe,
          BoxArrowRight,
          GraphUp} from 'react-bootstrap-icons';
 import './App.css';
-import icon from "./pins-icon.png"
+import icon from "./img/pins-icon.png"
 import axios from 'axios';
 
 

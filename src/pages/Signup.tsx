@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
 import { Card, Form, Error } from '../components/AuthForms';
-import icon from "../pins-icon.png"
+import icon from "../img/pins-icon.png"
 
 // <Signup/> functional component definition:
 const Signup = () => {
