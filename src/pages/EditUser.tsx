@@ -6,6 +6,8 @@ import { At, CardImage, Envelope, Lock, PersonCircle, X } from 'react-bootstrap-
 import axios from 'axios';
 import DeleteUser from './DeleteUser';
 import { BigCard } from '../components/AuthForms';
+import ImageContainer from './ImageContainer';
+import ImageForm from './ImageForm';
 
 // TypeScript interfaces:
 interface EditUserProps {
@@ -22,6 +24,12 @@ const EditUser = (props: EditUserProps) => {
   const [error, setError] = useState();
   const [isMounted, setIsMounted] = useState(false);
   const [username, setUsername] = useState('');
+
+  const [newImage, setNewImage] = useState([]);
+  
+  const handleNewImage = () => {
+    setNewImage([...newImage]);
+  }
   
   // onChange methods:
   const onChangeSetAvatar = (e: any) => {
@@ -156,6 +164,8 @@ const EditUser = (props: EditUserProps) => {
                     onChange={onChangeSetAvatar}
             />
           </div>
+          <ImageContainer newImage={newImage} />
+          <ImageForm handleNewImage={handleNewImage} />
         </div>
 
 

@@ -3,4 +3,5 @@ module.exports = {
 	score: require('./scoreController'),
 	user: require('./userController'),
 	auth: require('./authController'),
+	image: require('./imageController'),
 }

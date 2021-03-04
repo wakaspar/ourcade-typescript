@@ -3,6 +3,7 @@ const express = require('express'),
     app = express(),
     db = require('./models'),
     path = require('path'),
+    fs = require('fs'),
     controllers = require('./controllers'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
@@ -16,45 +17,6 @@ const express = require('express'),
     PORT = 4000,
     User = db.User;
 
-
-// MULTER IMAGE UPLOAD CONFIGURATION:
-// config multer diskStorage:
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, './uploads')
-//   },
-//   filename: function (req, file, cb) {
-//     let filename = 'avatar';
-//     req.body.file = filename;
-//     cb(null, filename + '-' + Date.now())
-//     // cb(null, file.fieldname + '-' + Date.now())
-    
-//   }
-// })
-// config multer upload options:
-// var upload = multer({ 
-//   storage: storage,
-//   limits:{fileSize: 1000000},
-// })
-
-// EXPRESS SERVER CONFIGURATION:
-// Config express middleware:
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'uploads')));
-app.use(cookieParser());
-// Config express-session:
-app.use(session({
-  secret: 'ourcadesecret00', // TODO: change this!
-  resave: false,
-  saveUninitialized: false
-}));
-// Initialize passport & start a passport session:
-app.use(passport.initialize());
-app.use(passport.session());
-// Passport config:
-passport.use(new LocalStrategy(db.User.authenticate()));
-passport.serializeUser(db.User.serializeUser());
-passport.deserializeUser(db.User.deserializeUser());
 // Prevent CORS errors:
 app.use(cors());
 app.use(function (req, res, next) {
@@ -66,6 +28,28 @@ app.use(function (req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
+// EXPRESS SERVER CONFIGURATION:
+// Config express middleware:
+app.use(bodyParser.json());
+// Store avatar data in 'uploads/':
+app.use(express.static('uploads')); 
+// Use cookieParser:
+app.use(cookieParser());
+// Config express-session:
+app.use(session({
+  secret: 'ourcadesecret00', // TODO: change this!
+  resave: false,
+  saveUninitialized: false
+}));
+// Initialize passport & start a session:
+app.use(passport.initialize());
+app.use(passport.session());
+// Passport config:
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
+
 
 // MONGODB INSTANCE CONNECTION:
 // Connect to database:
@@ -98,11 +82,10 @@ app.delete('/api/scores/', controllers.score.destroyAll);
 app.get('/api/users', controllers.user.index);
 app.get('/api/users/:id', controllers.user.show);
 app.post('/api/signup', controllers.user.create);
-app.put('/api/users/:id', upload.single('avatar'), controllers.user.update);
-app.post('/api/users/:id', upload.single('avatar'), controllers.user.avatar);
-
-
+app.put('/api/users/:id', controllers.user.update);
 app.delete('/api/users/:id', controllers.user.destroy);
+// Avatar routes:
+app.use('/api/avatars', require('./controllers/imageController'));
 // Auth routes:
 app.post('/api/login', passport.authenticate('local'), controllers.auth.login);
 app.post('/api/logout', controllers.auth.logout);
